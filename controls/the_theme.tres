@@ -1,0 +1,41 @@
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://bpwh4yi1152b1"]
+
+[ext_resource type="StyleBox" uid="uid://dkrdf1w7wuqfs" path="res://style/MyStyleBoxFlat.tres" id="1_bv7s3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bv7s3"]
+bg_color = Color(0.1104, 0.118667, 0.16, 1)
+border_width_left = 4
+border_width_top = 35
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0, 0.88, 1)
+corner_radius_top_left = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+expand_margin_left = 3.0
+expand_margin_top = 35.0
+expand_margin_right = 3.0
+expand_margin_bottom = 3.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rvekt"]
+bg_color = Color(0.1104, 0.118667, 0.16, 1)
+border_width_left = 4
+border_width_top = 35
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0, 0, 0.66, 1)
+corner_radius_top_left = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+expand_margin_left = 3.0
+expand_margin_top = 35.0
+expand_margin_right = 3.0
+expand_margin_bottom = 3.0
+
+[resource]
+AcceptDialog/styles/panel = ExtResource("1_bv7s3")
+Panel/styles/panel = ExtResource("1_bv7s3")
+PopupMenu/styles/panel = ExtResource("1_bv7s3")
+PopupPanel/styles/panel = ExtResource("1_bv7s3")
+Window/styles/embedded_border = SubResource("StyleBoxFlat_bv7s3")
+Window/styles/embedded_unfocused_border = SubResource("StyleBoxFlat_rvekt")

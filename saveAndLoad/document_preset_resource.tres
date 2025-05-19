@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="DocumentClass" load_steps=2 format=3 uid="uid://b3bkyp7pkd56o"]
+
+[ext_resource type="Script" uid="uid://bghm8633u1h5p" path="res://saveAndLoad/document_resource.gd" id="1_630to"]
+
+[resource]
+script = ExtResource("1_630to")
+id = Array[int]([])
+pos = Array[Vector2]([])
+color = Array[Color]([])
+LineText = Array[String]([])
+BodyText = Array[String]([])
+expanded = Array[bool]([])
+link_sb = Array[int]([])
+link_eb = Array[int]([])

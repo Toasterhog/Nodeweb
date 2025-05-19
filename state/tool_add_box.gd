@@ -1,0 +1,14 @@
+extends State
+class_name tool_add_box
+
+@onready var box_holder: Node2D = $"../../papper/boxHolder"
+var default_color = Color.DARK_BLUE
+
+func unhandled_input(event):
+	if event.is_action_pressed("LMB"):
+				var box = preload("res://papperthings/box.tscn").instantiate()
+				box.position = $"../../papper".get_global_mouse_position() - box.size/2
+				box.self_modulate = default_color
+				box.get_node("VBoxContainer/HBoxContainer/ColorPickerButton").color = default_color
+				box_holder.add_child(box)
+				

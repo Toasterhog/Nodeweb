@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://bbfr0s07ij6tq"]
+
+[ext_resource type="Script" uid="uid://bn4ggk0hwr4ve" path="res://papperthings/link.gd" id="1_vwmme"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vwmme"]
+resource_local_to_scene = true
+radius = 20.0
+height = 40.0
+
+[node name="Line2D" type="Line2D"]
+begin_cap_mode = 2
+end_cap_mode = 2
+antialiased = true
+script = ExtResource("1_vwmme")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CapsuleShape2D_vwmme")

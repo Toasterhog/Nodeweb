@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="DocumentClass" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://saveAndLoad/document_resource.gd" id="1_iuqsu"]
+
+[resource]
+script = ExtResource("1_iuqsu")
+id = Array[int]([])
+pos = Array[Vector2]([])
+color = Array[Color]([])
+LineText = Array[String]([])
+BodyText = Array[String]([])
+expanded = Array[bool]([])
+link_sb = Array[int]([])
+link_eb = Array[int]([])

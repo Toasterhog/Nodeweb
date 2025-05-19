@@ -1,0 +1,251 @@
+[gd_scene load_steps=22 format=3 uid="uid://dvarak1c2jild"]
+
+[ext_resource type="Texture2D" uid="uid://bwnp541db5h2r" path="res://zmiscellaneous/canvasbackround.png" id="2_lgaoh"]
+[ext_resource type="Script" uid="uid://be4x5mqb1hwnc" path="res://controls/save_button.gd" id="3_dslak"]
+[ext_resource type="Texture2D" uid="uid://cb5cxr1c7j8sf" path="res://zmiscellaneous/paintbucketicon.png" id="3_x4i5i"]
+[ext_resource type="StyleBox" uid="uid://dkrdf1w7wuqfs" path="res://style/MyStyleBoxFlat.tres" id="4_0y3lq"]
+[ext_resource type="Script" uid="uid://edjrnkcbaogx" path="res://scripts/camera_2d.gd" id="4_fc7so"]
+[ext_resource type="Script" uid="uid://dag601h4spdtu" path="res://scripts/Clear.gd" id="4_yvaoj"]
+[ext_resource type="Script" uid="uid://ctai3hwf5wpoc" path="res://scripts/popup_menu.gd" id="5_gjb7p"]
+[ext_resource type="Script" uid="uid://b28kpbtff8ec4" path="res://state/state_machine_tools.gd" id="6_iv76u"]
+[ext_resource type="PackedScene" uid="uid://d0w244dm2f7g8" path="res://controls/pp_save_name.tscn" id="6_rxabt"]
+[ext_resource type="Script" uid="uid://b81hvllv8aegy" path="res://state/tool_add_box.gd" id="7_ah0n3"]
+[ext_resource type="Theme" uid="uid://bpwh4yi1152b1" path="res://controls/the_theme.tres" id="7_yvaoj"]
+[ext_resource type="Script" uid="uid://fe15v5cgcy1x" path="res://scripts/id_manager.gd" id="8_fc7so"]
+[ext_resource type="Script" uid="uid://c1uha3t6cvqka" path="res://state/tool_edit.gd" id="8_lgaoh"]
+[ext_resource type="Script" uid="uid://crlryxb80odig" path="res://state/tool_add_link.gd" id="8_vonwv"]
+[ext_resource type="Script" uid="uid://bsuiepppwr12n" path="res://state/tool_eraze.gd" id="9_lgaoh"]
+[ext_resource type="Script" uid="uid://bfsi0bgsuxrco" path="res://saveAndLoad/save_dialog.gd" id="11_iv76u"]
+[ext_resource type="Script" uid="uid://b0xc8u2lyy4dv" path="res://saveAndLoad/load_dialog.gd" id="12_x4i5i"]
+[ext_resource type="Script" uid="uid://sm8xxnbtvc50" path="res://state/tool_add_bundle.gd" id="15_dslak"]
+
+[sub_resource type="Curve" id="Curve_nhe3j"]
+_data = [Vector2(0, 0.5), 0.0, 0.0, 0, 0, Vector2(0.140909, 0.213483), 0.0, 0.0, 0, 0, Vector2(0.245455, 0.94382), 0.0, 0.0, 0, 0, Vector2(0.372727, 0.0224719), 0.0, 0.0, 0, 0, Vector2(0.513636, 0.842697), 0.0, 0.0, 0, 0, Vector2(0.65, 0.224719), 0.0, 0.0, 0, 0, Vector2(0.781818, 0.719101), 0.0, 0.0, 0, 0, Vector2(1, 0.516854), 0.0, 0.0, 0, 0]
+point_count = 8
+
+[sub_resource type="Curve" id="Curve_dslak"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 6.74156, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="GDScript" id="GDScript_wpj46"]
+script/source = "extends Node
+
+#save to path
+#save to latest saved-to path
+# save to def path?
+#save to savefolder and only define name - lineedit simpler qol wise
+"
+
+[node name="Main" type="Node2D"]
+
+[node name="papper" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="papper"]
+modulate = Color(0.53, 0.53, 0.53, 1)
+texture_filter = 1
+texture_repeat = 2
+scale = Vector2(6, 6)
+texture = ExtResource("2_lgaoh")
+region_enabled = true
+region_rect = Rect2(-8, -8, 2048, 2048)
+
+[node name="bundleHolder" type="Node2D" parent="papper"]
+
+[node name="linkHolder" type="Node2D" parent="papper"]
+
+[node name="boxHolder" type="Node2D" parent="papper"]
+
+[node name="Camera2D" type="Camera2D" parent="papper"]
+limit_left = -6000
+limit_top = -4000
+limit_right = 6000
+limit_bottom = 4000
+limit_smoothed = true
+position_smoothing_enabled = true
+position_smoothing_speed = 100.0
+editor_draw_limits = true
+script = ExtResource("4_fc7so")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+
+[node name="box" type="Button" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "box"
+
+[node name="link" type="Button" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "link"
+
+[node name="bundle" type="Button" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "bundle"
+
+[node name="erasor" type="Button" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "delete"
+
+[node name="edit" type="Button" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "edit"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+
+[node name="save" type="Button" parent="CanvasLayer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Save"
+script = ExtResource("3_dslak")
+cur = SubResource("Curve_nhe3j")
+
+[node name="load" type="Button" parent="CanvasLayer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Load"
+
+[node name="ColorPickerButton" type="ColorPickerButton" parent="CanvasLayer/VBoxContainer/HBoxContainer2"]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(31, 0)
+layout_mode = 2
+flat = true
+color = Color(0.38, 0.106907, 0.0874, 1)
+
+[node name="Button" type="Button" parent="CanvasLayer/VBoxContainer/HBoxContainer2/ColorPickerButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+icon = ExtResource("3_x4i5i")
+expand_icon = true
+
+[node name="Clear" type="Button" parent="CanvasLayer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Clear"
+script = ExtResource("4_yvaoj")
+curve = SubResource("Curve_dslak")
+
+[node name="PopupMenu" type="PopupMenu" parent="CanvasLayer"]
+title = "titelthig"
+position = Vector2i(220, 110)
+size = Vector2i(103, 89)
+theme = ExtResource("7_yvaoj")
+theme_override_styles/panel = ExtResource("4_0y3lq")
+hide_on_state_item_selection = true
+item_count = 3
+item_0/text = "explorer"
+item_0/id = 0
+item_1/text = "name"
+item_1/id = 1
+item_2/text = "latest"
+item_2/id = 2
+script = ExtResource("5_gjb7p")
+
+[node name="pp_SaveName" parent="CanvasLayer" instance=ExtResource("6_rxabt")]
+transparent_bg = true
+initial_position = 2
+size = Vector2i(231, 113)
+visible = false
+wrap_controls = true
+transparent = true
+
+[node name="Label" type="Label" parent="CanvasLayer/pp_SaveName/MarginContainer/vbc" index="0"]
+modulate = Color(0.6, 0.6, 0.6, 1)
+layout_mode = 2
+text = "no savefolder selected"
+
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="CanvasLayer"]
+transparent_bg = true
+title = "Confirm"
+initial_position = 2
+size = Vector2i(200, 80)
+exclusive = false
+borderless = true
+transparent = true
+popup_window = true
+keep_title_visible = false
+theme = ExtResource("7_yvaoj")
+ok_button_text = "Delete all"
+
+[node name="state_machine_tools" type="Node" parent="."]
+script = ExtResource("6_iv76u")
+
+[node name="tool_add_box" type="Node" parent="state_machine_tools"]
+script = ExtResource("7_ah0n3")
+metadata/_custom_type_script = "uid://b81hvllv8aegy"
+
+[node name="ToolAddLink" type="Node" parent="state_machine_tools" groups=["tool_add_link"]]
+script = ExtResource("8_vonwv")
+metadata/_custom_type_script = "uid://crlryxb80odig"
+
+[node name="tool_edit" type="Node" parent="state_machine_tools"]
+script = ExtResource("8_lgaoh")
+metadata/_custom_type_script = "uid://c1uha3t6cvqka"
+
+[node name="tool_delete" type="Node" parent="state_machine_tools"]
+script = ExtResource("9_lgaoh")
+metadata/_custom_type_script = "uid://bsuiepppwr12n"
+
+[node name="ToolAddBundle" type="Node" parent="state_machine_tools"]
+script = ExtResource("15_dslak")
+metadata/_custom_type_script = "uid://sm8xxnbtvc50"
+
+[node name="ID manager" type="Node" parent="."]
+script = ExtResource("8_fc7so")
+
+[node name="save_load_node" type="Node" parent="."]
+script = SubResource("GDScript_wpj46")
+
+[node name="SaveDialog" type="FileDialog" parent="save_load_node"]
+initial_position = 2
+access = 2
+use_native_dialog = true
+script = ExtResource("11_iv76u")
+
+[node name="LoadDialog" type="FileDialog" parent="save_load_node"]
+title = "Open a File"
+initial_position = 2
+ok_button_text = "Open"
+file_mode = 0
+access = 2
+use_native_dialog = true
+script = ExtResource("12_x4i5i")
+
+[node name="FolderDialog" type="FileDialog" parent="save_load_node"]
+title = "Open a Directory"
+ok_button_text = "Select Current Folder"
+file_mode = 2
+use_native_dialog = true
+
+[connection signal="button_down" from="CanvasLayer/VBoxContainer/HBoxContainer/box" to="state_machine_tools" method="_on_box_button_down"]
+[connection signal="button_down" from="CanvasLayer/VBoxContainer/HBoxContainer/link" to="state_machine_tools" method="_on_link_button_down"]
+[connection signal="button_down" from="CanvasLayer/VBoxContainer/HBoxContainer/bundle" to="state_machine_tools" method="_on_bundle_button_down"]
+[connection signal="button_down" from="CanvasLayer/VBoxContainer/HBoxContainer/erasor" to="state_machine_tools" method="_on_erasor_button_down"]
+[connection signal="button_down" from="CanvasLayer/VBoxContainer/HBoxContainer/edit" to="state_machine_tools" method="_on_edit_button_down"]
+[connection signal="button_up" from="CanvasLayer/VBoxContainer/HBoxContainer2/save" to="CanvasLayer/PopupMenu" method="_on_save_button_up"]
+[connection signal="button_up" from="CanvasLayer/VBoxContainer/HBoxContainer2/load" to="save_load_node/LoadDialog" method="_on_load_button_up"]
+[connection signal="popup_closed" from="CanvasLayer/VBoxContainer/HBoxContainer2/ColorPickerButton" to="state_machine_tools" method="_on_color_picker_button_popup_closed"]
+[connection signal="button_up" from="CanvasLayer/VBoxContainer/HBoxContainer2/Clear" to="CanvasLayer/VBoxContainer/HBoxContainer2/Clear" method="_on_button_up"]
+[connection signal="mouse_entered" from="CanvasLayer/VBoxContainer/HBoxContainer2/Clear" to="CanvasLayer/VBoxContainer/HBoxContainer2/Clear" method="_on_mouse_entered"]
+[connection signal="index_pressed" from="CanvasLayer/PopupMenu" to="CanvasLayer/PopupMenu" method="_on_index_pressed"]
+[connection signal="close_requested" from="CanvasLayer/pp_SaveName" to="CanvasLayer/PopupMenu" method="_on_pp_save_name_close_requested"]
+[connection signal="text_submitted" from="CanvasLayer/pp_SaveName/MarginContainer/vbc/LineEdit" to="CanvasLayer/PopupMenu" method="_on_line_edit_text_submitted"]
+[connection signal="button_up" from="CanvasLayer/pp_SaveName/MarginContainer/vbc/Button" to="CanvasLayer/PopupMenu" method="_on_button_button_up"]
+[connection signal="confirmed" from="CanvasLayer/ConfirmationDialog" to="CanvasLayer/VBoxContainer/HBoxContainer2/Clear" method="_on_confirmation_dialog_confirmed"]
+[connection signal="button_animate" from="save_load_node/SaveDialog" to="CanvasLayer/VBoxContainer/HBoxContainer2/save" method="_on_save_dialog_button_animate"]
+[connection signal="file_selected" from="save_load_node/SaveDialog" to="save_load_node/SaveDialog" method="_on_file_selected"]
+[connection signal="file_selected" from="save_load_node/LoadDialog" to="save_load_node/LoadDialog" method="_on_file_selected"]
+[connection signal="dir_selected" from="save_load_node/FolderDialog" to="save_load_node/SaveDialog" method="_on_folder_dialog_dir_selected"]
+
+[editable path="CanvasLayer/pp_SaveName"]
