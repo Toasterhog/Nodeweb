@@ -60,6 +60,7 @@ func _process(_delta: float) -> void:
 
 func _on_mouse_entered() -> void:
 	mouse_inside = true
+	mouse_default_cursor_shape = Control.CURSOR_MOVE
 
 func _on_mouse_exited() -> void:
 	mouse_inside = false
@@ -98,11 +99,10 @@ func _on_drag_button_2_pressed() -> void:
 func _on_drag_button_2_button_up() -> void:
 	is_scaling2 = false
 
-#TODO
+#TODO INFO ALERT ATTENTION
 #save and load bundles
-#color
-#improve look (TE + minipanel) done
+#color, default color apply to bundle, color tool - click on boxes and bundlers
 #extra: cameramove on MMB oftener inbut
 #copy paste boxes or better selected regions
-
 #tags
+#bundle/panelcontainer resise to fit text, bundle resise to fit panelcontainer
