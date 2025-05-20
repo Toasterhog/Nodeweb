@@ -27,8 +27,6 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-
-	
 	if event is InputEventMouseButton:
 		if state_machine.current_state.name == "ToolAddBundle"  and event.button_index == MOUSE_BUTTON_LEFT\
 		or state_machine.current_state.name == "tool_edit" and event.button_index == MOUSE_BUTTON_RIGHT:

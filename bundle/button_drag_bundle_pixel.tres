@@ -10,11 +10,11 @@ modulate_color = Color(0.1144, 0.250067, 0.44, 1)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_tibxn"]
 texture = ExtResource("1_rc0om")
-modulate_color = Color(0.44, 0.24464, 0.1144, 1)
+modulate_color = Color(0.5, 0.5, 0.5, 1)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8skqq"]
 texture = ExtResource("1_rc0om")
-modulate_color = Color(0.23, 0.1541, 0.1035, 1)
+modulate_color = Color(0.1947, 0.47141, 0.59, 1)
 
 [resource]
 Button/styles/focus = SubResource("StyleBoxEmpty_8skqq")

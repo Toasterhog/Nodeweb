@@ -7,5 +7,12 @@ class_name DocumentClass
 @export var LineText : Array[String] = []
 @export var BodyText : Array[String] = []
 @export var expanded : Array[bool] = []
+
 @export var link_sb : Array[int] = []
 @export var link_eb : Array[int] = []
+
+@export var bundle_id : Array[int] = []
+@export var bundle_pos : Array[Vector2] = []
+@export var bundle_size : Array[Vector2] = []
+@export var bundle_label : Array[String] = []
+@export var bundle_color : Array[Color] = []

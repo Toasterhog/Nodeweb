@@ -81,6 +81,7 @@ func main_input(): #ATTENTION this is triggered sometimes when typing text!
 func vis_indicator_button(butt : String):
 	$"../CanvasLayer/VBoxContainer/HBoxContainer/box".modulate = Color(1,1,1)
 	$"../CanvasLayer/VBoxContainer/HBoxContainer/link".modulate = Color(1,1,1)
+	$"../CanvasLayer/VBoxContainer/HBoxContainer/bundle".modulate = Color(1,1,1)
 	$"../CanvasLayer/VBoxContainer/HBoxContainer/erasor".modulate = Color(1,1,1)
 	$"../CanvasLayer/VBoxContainer/HBoxContainer/edit".modulate = Color(1,1,1)
 	if not butt: return

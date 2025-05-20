@@ -153,12 +153,10 @@ item_2/id = 2
 script = ExtResource("5_gjb7p")
 
 [node name="pp_SaveName" parent="CanvasLayer" instance=ExtResource("6_rxabt")]
-transparent_bg = true
 initial_position = 2
 size = Vector2i(231, 113)
 visible = false
 wrap_controls = true
-transparent = true
 
 [node name="Label" type="Label" parent="CanvasLayer/pp_SaveName/MarginContainer/vbc" index="0"]
 modulate = Color(0.6, 0.6, 0.6, 1)

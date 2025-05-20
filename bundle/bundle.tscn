@@ -8,6 +8,7 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8skqq"]
 bg_color = Color(0.09, 0.09, 0.09, 0.839216)
 border_color = Color(0.2542, 0.485873, 0.62, 1)
+corner_radius_top_left = 25
 corner_radius_bottom_right = 20
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8skqq"]
@@ -21,7 +22,6 @@ mouse_filter = 1
 script = ExtResource("1_e8frx")
 
 [node name="Panel" type="Panel" parent="."]
-modulate = Color(0.1584, 0.44784, 0.48, 1)
 texture_filter = 1
 custom_minimum_size = Vector2(180, 180)
 layout_mode = 1
