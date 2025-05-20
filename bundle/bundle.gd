@@ -103,6 +103,8 @@ func _on_drag_button_2_button_up() -> void:
 #TODO
 #save and load bundles
 #color
-#improve look (TE + minipanel)
+#improve look (TE + minipanel) done
 #extra: cameramove on MMB oftener inbut
 #copy paste boxes or better selected regions
+
+#tags
