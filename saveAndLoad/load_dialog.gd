@@ -3,8 +3,10 @@ extends FileDialog
 var path = null
 @onready var box_holder: Node2D = $"../../papper/boxHolder"
 @onready var link_holder: Node2D = $"../../papper/linkHolder"
+@onready var bundle_holder: Node2D = $"../../papper/bundleHolder"
 const BOX = preload("res://papperthings/box.tscn")
 const LINK = preload("res://papperthings/link.tscn")
+const BUNDLE = preload("res://bundle/bundle.tscn")
 
 func _on_load_button_up() -> void:
 	#current_dir = OS.get_user_data_dir()
@@ -34,6 +36,12 @@ func palce_to_papper():
 	var A_ex := res.expanded
 	var LinkS := res.link_sb
 	var LinkE := res.link_eb
+	
+	var Bid := res.bundle_id
+	var Bpos := res.bundle_pos
+	var Bsize := res.bundle_size
+	var Bcolor := res.bundle_color
+	var Blabel := res.bundle_label
 	
 	for i in A_position.size():
 		
@@ -68,6 +76,19 @@ func palce_to_papper():
 		link.start_box = startbox
 		link.end_box = endbox
 		link_holder.add_child(link)
+	
+	for i in Bid.size():
+		var bundle := BUNDLE.instantiate()
+		
+		bundle.position = Bpos[i]
+		bundle.get_node("Panel").size = Bsize[i]
+		bundle.get_node("Panel").modulate = Bcolor[i]
+		bundle.get_node("PanelContainer/TextEdit").text = Blabel[i]
+		
+		#bundle.id = Bid[i] + 1000
+		bundle_holder.add_child(bundle)
+	
+	
 	
 	IdManager.reset_ids()
 	

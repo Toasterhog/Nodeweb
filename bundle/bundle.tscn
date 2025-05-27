@@ -1,18 +1,16 @@
-[gd_scene load_steps=8 format=3 uid="uid://bhwvnws1rjko1"]
+[gd_scene load_steps=6 format=3 uid="uid://bhwvnws1rjko1"]
 
 [ext_resource type="Script" uid="uid://0qftln2sxev6" path="res://bundle/bundle.gd" id="1_e8frx"]
 [ext_resource type="StyleBox" uid="uid://dslie07m1kvw8" path="res://bundle/stf_smooth.tres" id="2_8skqq"]
-[ext_resource type="Texture2D" uid="uid://fylrktljjp54" path="res://bundle/corner2.png" id="3_7y1ch"]
 [ext_resource type="Theme" uid="uid://dw2sfd8pw202m" path="res://bundle/button_drag_bundle_pixel.tres" id="3_8skqq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8skqq"]
 bg_color = Color(0.09, 0.09, 0.09, 0.839216)
 border_color = Color(0.2542, 0.485873, 0.62, 1)
+corner_radius_top_left = 25
 corner_radius_bottom_right = 20
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8skqq"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7y1ch"]
 
 [node name="Bundle" type="Control"]
 layout_mode = 3
@@ -21,7 +19,6 @@ mouse_filter = 1
 script = ExtResource("1_e8frx")
 
 [node name="Panel" type="Panel" parent="."]
-modulate = Color(0.1584, 0.44784, 0.48, 1)
 texture_filter = 1
 custom_minimum_size = Vector2(180, 180)
 layout_mode = 1
@@ -46,6 +43,7 @@ grow_horizontal = 0
 grow_vertical = 0
 size_flags_horizontal = 8
 size_flags_vertical = 8
+mouse_default_cursor_shape = 12
 theme = ExtResource("3_8skqq")
 action_mode = 0
 
@@ -59,48 +57,32 @@ offset_top = 35.0
 scale = Vector2(-1, -1)
 size_flags_horizontal = 8
 size_flags_vertical = 8
+mouse_default_cursor_shape = 12
 theme = ExtResource("3_8skqq")
 action_mode = 0
 
-[node name="PanelContainer" type="PanelContainer" parent="."]
+[node name="PanelContainer" type="Panel" parent="."]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 10.0
 offset_right = 132.0
 offset_bottom = 60.0
 mouse_filter = 2
+mouse_default_cursor_shape = 13
 theme_override_styles/panel = SubResource("StyleBoxFlat_8skqq")
 
 [node name="TextEdit" type="TextEdit" parent="PanelContainer"]
-layout_mode = 2
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxEmpty_8skqq")
 placeholder_text = "Bundle"
 scroll_fit_content_height = true
 scroll_fit_content_width = true
-
-[node name="drag_button_te" type="Button" parent="PanelContainer/TextEdit"]
-visible = false
-modulate = Color(0.74902, 0.74902, 0.74902, 0.501961)
-texture_filter = 1
-custom_minimum_size = Vector2(10, 10)
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -10.0
-offset_top = -10.0
-grow_horizontal = 0
-grow_vertical = 0
-size_flags_horizontal = 8
-size_flags_vertical = 8
-theme_override_styles/normal = SubResource("StyleBoxEmpty_7y1ch")
-icon = ExtResource("3_7y1ch")
-icon_alignment = 1
-expand_icon = true
 
 [connection signal="button_up" from="Panel/drag_button" to="." method="_on_drag_button_button_up"]
 [connection signal="pressed" from="Panel/drag_button" to="." method="_on_drag_button_pressed"]

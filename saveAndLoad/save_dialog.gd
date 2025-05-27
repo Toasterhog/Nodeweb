@@ -5,6 +5,7 @@ var savefolder : String = ""
 const DOCUMENT_PRESET_RESOURCE = preload("res://saveAndLoad/document_preset_resource.tres")
 @onready var link_holder: Node2D = $"../../papper/linkHolder"
 @onready var box_holder: Node2D = $"../../papper/boxHolder"
+@onready var bundle_holder: Node2D = $"../../papper/bundleHolder"
 @onready var folder_dialog: FileDialog = $"../FolderDialog"
 signal button_animate
 
@@ -53,6 +54,12 @@ func save_doc_to_path():
 	document.link_sb.resize(link_holder.get_child_count())
 	document.link_eb.resize(link_holder.get_child_count())
 	
+	document.bundle_id.resize(bundle_holder.get_child_count())
+	document.bundle_pos.resize(bundle_holder.get_child_count())
+	document.bundle_size.resize(bundle_holder.get_child_count())
+	document.bundle_color.resize(bundle_holder.get_child_count())
+	document.bundle_label.resize(bundle_holder.get_child_count())
+	
 	for b in box_holder.get_children():
 		var i = b.get_index()
 		document.id[i] = b.id
@@ -66,5 +73,13 @@ func save_doc_to_path():
 		var i = l.get_index()
 		document.link_sb[i] = l.start_box.id
 		document.link_eb[i] = l.end_box.id
+		
+	for b in bundle_holder.get_children():
+		var i = b.get_index()
+		document.bundle_id[i] = i
+		document.bundle_pos[i] = b.position
+		document.bundle_size[i] = b.get_node("Panel").size
+		document.bundle_color[i] = b.get_node("Panel").modulate
+		document.bundle_label[i] = b.get_node("PanelContainer/TextEdit").text
 	
 	ResourceSaver.save(document, path)

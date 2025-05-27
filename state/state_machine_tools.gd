@@ -2,13 +2,12 @@ extends Node
 
 var current_state : State = State.new()
 var states : Dictionary = {}
+signal ToolChanged(tool : String)
 
 func _ready() -> void:
 	for child in get_children():
 		if child is State:
 			states[child.name] = child
-			child.Transisioned.connect(child_transision)
-	print(states)
 	_on_color_picker_button_popup_closed()
 
 
@@ -35,8 +34,9 @@ func child_transision(new_state_name):
 		current_state.exit()
 	
 	new_state.enter()
-	
 	current_state = new_state
+	ToolChanged.emit(new_state_name)
+
 
 
 
@@ -61,6 +61,10 @@ func _on_erasor_button_down() -> void:
 	child_transision("tool_delete")
 	vis_indicator_button("erasor")
 
+func _on_color_button_down() -> void:
+	child_transision("ToolColor")
+	vis_indicator_button("color")
+
 func main_input(): #ATTENTION this is triggered sometimes when typing text!
 	
 	if Input.is_action_just_pressed("box"):
@@ -81,8 +85,10 @@ func main_input(): #ATTENTION this is triggered sometimes when typing text!
 func vis_indicator_button(butt : String):
 	$"../CanvasLayer/VBoxContainer/HBoxContainer/box".modulate = Color(1,1,1)
 	$"../CanvasLayer/VBoxContainer/HBoxContainer/link".modulate = Color(1,1,1)
+	$"../CanvasLayer/VBoxContainer/HBoxContainer/bundle".modulate = Color(1,1,1)
 	$"../CanvasLayer/VBoxContainer/HBoxContainer/erasor".modulate = Color(1,1,1)
 	$"../CanvasLayer/VBoxContainer/HBoxContainer/edit".modulate = Color(1,1,1)
+	$"../CanvasLayer/VBoxContainer/HBoxContainer/color".modulate = Color(1,1,1)
 	if not butt: return
 	get_node("../CanvasLayer/VBoxContainer/HBoxContainer/%s" % butt).modulate = Color(0.9,0.9,0.2)
 	get_node("../CanvasLayer/VBoxContainer/HBoxContainer/%s" % butt).grab_focus()
@@ -93,3 +99,4 @@ func _on_color_picker_button_popup_closed() -> void:
 	var color = $"../CanvasLayer/VBoxContainer/HBoxContainer2/ColorPickerButton".color
 	$"../CanvasLayer/VBoxContainer/HBoxContainer2/ColorPickerButton/Button".modulate = color
 	$tool_add_box.default_color = color
+	$ToolAddBundle.default_color = color
