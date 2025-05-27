@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dvarak1c2jild"]
+[gd_scene load_steps=23 format=3 uid="uid://dvarak1c2jild"]
 
 [ext_resource type="Texture2D" uid="uid://bwnp541db5h2r" path="res://zmiscellaneous/canvasbackround.png" id="2_lgaoh"]
 [ext_resource type="Script" uid="uid://be4x5mqb1hwnc" path="res://controls/save_button.gd" id="3_dslak"]
@@ -18,6 +18,7 @@
 [ext_resource type="Script" uid="uid://bfsi0bgsuxrco" path="res://saveAndLoad/save_dialog.gd" id="11_iv76u"]
 [ext_resource type="Script" uid="uid://b0xc8u2lyy4dv" path="res://saveAndLoad/load_dialog.gd" id="12_x4i5i"]
 [ext_resource type="Script" uid="uid://sm8xxnbtvc50" path="res://state/tool_add_bundle.gd" id="15_dslak"]
+[ext_resource type="Script" uid="uid://dbxxaawg3f7lh" path="res://state/tool_color.gd" id="16_nhe3j"]
 
 [sub_resource type="Curve" id="Curve_nhe3j"]
 _data = [Vector2(0, 0.5), 0.0, 0.0, 0, 0, Vector2(0.140909, 0.213483), 0.0, 0.0, 0, 0, Vector2(0.245455, 0.94382), 0.0, 0.0, 0, 0, Vector2(0.372727, 0.0224719), 0.0, 0.0, 0, 0, Vector2(0.513636, 0.842697), 0.0, 0.0, 0, 0, Vector2(0.65, 0.224719), 0.0, 0.0, 0, 0, Vector2(0.781818, 0.719101), 0.0, 0.0, 0, 0, Vector2(1, 0.516854), 0.0, 0.0, 0, 0]
@@ -69,8 +70,8 @@ script = ExtResource("4_fc7so")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 247.0
+offset_bottom = 66.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
@@ -99,6 +100,10 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "edit"
 
+[node name="color" type="Button" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "color"
+
 [node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
 
@@ -117,7 +122,7 @@ self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(31, 0)
 layout_mode = 2
 flat = true
-color = Color(0.38, 0.106907, 0.0874, 1)
+color = Color(0.0494, 0.19266, 0.38, 1)
 
 [node name="Button" type="Button" parent="CanvasLayer/VBoxContainer/HBoxContainer2/ColorPickerButton"]
 layout_mode = 1
@@ -126,11 +131,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
+mouse_filter = 1
 icon = ExtResource("3_x4i5i")
 expand_icon = true
 
 [node name="Clear" type="Button" parent="CanvasLayer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 text = "Clear"
 script = ExtResource("4_yvaoj")
@@ -199,6 +205,10 @@ metadata/_custom_type_script = "uid://bsuiepppwr12n"
 script = ExtResource("15_dslak")
 metadata/_custom_type_script = "uid://sm8xxnbtvc50"
 
+[node name="ToolColor" type="Node" parent="state_machine_tools"]
+script = ExtResource("16_nhe3j")
+metadata/_custom_type_script = "uid://dbxxaawg3f7lh"
+
 [node name="ID manager" type="Node" parent="."]
 script = ExtResource("8_fc7so")
 
@@ -231,6 +241,7 @@ use_native_dialog = true
 [connection signal="button_down" from="CanvasLayer/VBoxContainer/HBoxContainer/bundle" to="state_machine_tools" method="_on_bundle_button_down"]
 [connection signal="button_down" from="CanvasLayer/VBoxContainer/HBoxContainer/erasor" to="state_machine_tools" method="_on_erasor_button_down"]
 [connection signal="button_down" from="CanvasLayer/VBoxContainer/HBoxContainer/edit" to="state_machine_tools" method="_on_edit_button_down"]
+[connection signal="button_down" from="CanvasLayer/VBoxContainer/HBoxContainer/color" to="state_machine_tools" method="_on_color_button_down"]
 [connection signal="button_up" from="CanvasLayer/VBoxContainer/HBoxContainer2/save" to="CanvasLayer/PopupMenu" method="_on_save_button_up"]
 [connection signal="button_up" from="CanvasLayer/VBoxContainer/HBoxContainer2/load" to="save_load_node/LoadDialog" method="_on_load_button_up"]
 [connection signal="popup_closed" from="CanvasLayer/VBoxContainer/HBoxContainer2/ColorPickerButton" to="state_machine_tools" method="_on_color_picker_button_popup_closed"]

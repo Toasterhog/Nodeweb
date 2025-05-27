@@ -12,7 +12,7 @@ func _ready() -> void:
 	
 
 
-func _unhandled_input(event: InputEvent) -> void:
+func _input(event: InputEvent) -> void: #WARNING ATTENTION this was _unhandled_input before
 	if event is InputEventMouseMotion:
 		if event.button_mask == MOUSE_BUTTON_MASK_MIDDLE:
 			position -= event.relative / zoom 
@@ -31,6 +31,8 @@ func _unhandled_input(event: InputEvent) -> void:
 				zoom_in()
 			if event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 				zoom_out()
+	
+
 
 func zoom_out() -> void:
 	target_zoom = max(target_zoom * (1- delta_zoom), min_zoom)

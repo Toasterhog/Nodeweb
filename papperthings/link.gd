@@ -4,10 +4,10 @@ class_name Link
 @export var start_box: Panel
 @export var end_box: Panel
 
-var default_width := 8.0
-var hover_width := 14.0
+const  default_width := 8.0
+const hover_width := 14.0
 var base_color := Color.GRAY
-var hover_color := Color.RED
+const hover_color := Color.RED
 
 @onready var line := $"."
 @onready var collision_shape := $Area2D/CollisionShape2D

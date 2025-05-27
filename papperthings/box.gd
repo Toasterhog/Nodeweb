@@ -64,6 +64,8 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_MASK_RIGHT \
 	and event.double_click and mouse_inside:
 		show_notes()
+	
+
 
 func _process(_delta: float) -> void:
 	
@@ -98,9 +100,14 @@ func _on_mouse_exited() -> void:
 	mouse_inside = false
 
 func _gui_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT: #delete
 		if state_machine.current_state.name == "tool_delete":
 			delete_self()
+	
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and state_machine.current_state.name == "ToolColor": #color
+			var col = state_machine.get_node("tool_add_box").default_color
+			self_modulate = col
+			$VBoxContainer/HBoxContainer/ColorPickerButton.color = col
 
 func show_notes():
 	if TE.visible:

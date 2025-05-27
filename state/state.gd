@@ -1,7 +1,7 @@
 extends Node
 class_name State
 
-signal Transisioned
+
 var isactive : bool = false
 
 func enter():
