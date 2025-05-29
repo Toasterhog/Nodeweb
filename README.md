@@ -15,12 +15,14 @@ box - inverse color brightness
 ## QoL
 bundle z-sorting - paused  
 (delete bundles by sweeping)  
+resizablebox title textedit -new  
 
 
 ## Feature
 tags  
 - sort by and hide entities with tags  
 - copy paste boxes or selected regions
+directional links -new  
 
 
 ## Finished
