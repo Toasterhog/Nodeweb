@@ -17,6 +17,8 @@ bundle z-sorting - paused
 (delete bundles by sweeping)  
 resizablebox title textedit  
 visual indicator of delete tool hover
+save_latest path should update when loading file  
+
 
 ## Feature
 tags  
