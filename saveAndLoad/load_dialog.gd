@@ -21,7 +21,6 @@ func _on_file_selected(filepath: String) -> void:
 func palce_to_papper():
 	var res : DocumentClass
 	if ResourceLoader.exists(path):
-		print("existed")
 		res = ResourceLoader.load(path)
 	else: 
 		print("rotten file bleh")
@@ -59,6 +58,7 @@ func palce_to_papper():
 		box.get_node("VBoxContainer/HBoxContainer/ColorPickerButton").visible = A_ex[i]
 		box.id = A_id[i] + 1000
 		box_holder.add_child(box)
+		box.update_vbc_and_panel_size() #ATTENTION
 		
 	for i in LinkS.size():
 		var link = LINK.instantiate()
