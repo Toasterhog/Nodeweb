@@ -10,7 +10,7 @@ setting for mac mode
 bundle/panelcontainer resise to fit text, bundle resise to fit panelcontainer  
 box color button - hide alfa checkboardpattern  
 box - inverse color brightness  
-
+box panel size
 
 ## QoL
 bundle z-sorting - paused  
@@ -18,7 +18,7 @@ bundle z-sorting - paused
 resizablebox title textedit  
 visual indicator of delete tool hover
 save_latest path should update when loading file  
-
+infinite canvas and decreased min zoom
 
 ## Feature
 tags  
@@ -34,4 +34,5 @@ bundle delete animation
 color, default color apply to bundle, color tool - click on boxes and bundlers  
 cameramove on MMB oftener inbut  
 clear button - clear bundles  
-screen size adjust
+screen size adjust  
+update id_manager.next_id after loading document
