@@ -6,7 +6,7 @@ var is_dragging: bool = false
 var link_preview: Line2D = null
 var start_box: Panel = null
 @onready var papper: Node2D = $"../../papper"
-@onready var link_scene = preload("res://papperthings/link.tscn")
+@onready var link_scene = preload("uid://bbfr0s07ij6tq")
 @onready var link_holder = $"../../papper/linkHolder"
 
 func enter():

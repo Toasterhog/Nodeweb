@@ -4,18 +4,19 @@ var path = null
 @onready var box_holder: Node2D = $"../../papper/boxHolder"
 @onready var link_holder: Node2D = $"../../papper/linkHolder"
 @onready var bundle_holder: Node2D = $"../../papper/bundleHolder"
-const BOX = preload("res://papperthings/box.tscn")
-const LINK = preload("res://papperthings/link.tscn")
+const BOX = preload("uid://wfnqhd3r5fxx")
+const LINK = preload("uid://bbfr0s07ij6tq")
 const BUNDLE = preload("res://bundle/bundle.tscn")
 
 func _on_load_button_up() -> void:
 	#current_dir = OS.get_user_data_dir()
 	popup_centered()
 
-
 func _on_file_selected(filepath: String) -> void:
 	path = filepath
 	print("selected path: ", path)
+	if not $"../SaveDialog".path:
+		$"../SaveDialog".path = path
 	palce_to_papper()
 
 func palce_to_papper():

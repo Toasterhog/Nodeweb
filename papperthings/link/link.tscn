@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bbfr0s07ij6tq"]
 
-[ext_resource type="Script" uid="uid://bn4ggk0hwr4ve" path="res://papperthings/link.gd" id="1_vwmme"]
+[ext_resource type="Script" uid="uid://bn4ggk0hwr4ve" path="res://papperthings/link/link.gd" id="1_foi4b"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vwmme"]
 resource_local_to_scene = true
@@ -11,7 +11,7 @@ height = 40.0
 begin_cap_mode = 2
 end_cap_mode = 2
 antialiased = true
-script = ExtResource("1_vwmme")
+script = ExtResource("1_foi4b")
 
 [node name="Area2D" type="Area2D" parent="."]
 

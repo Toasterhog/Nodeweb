@@ -14,7 +14,7 @@ func name_selected(namee : String) -> bool:
 	if not savefolder:
 		folder_dialog.popup()
 		return false
-	if not(name.is_valid_filename() and name.contains(".") == false and name):
+	if not(namee.is_valid_filename() and namee.contains(".") == false and namee):
 		return false
 	namee = namee.validate_filename()
 	path = savefolder + namee

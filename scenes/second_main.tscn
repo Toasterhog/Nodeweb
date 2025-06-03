@@ -234,6 +234,7 @@ script = ExtResource("12_x4i5i")
 title = "Open a Directory"
 ok_button_text = "Select Current Folder"
 file_mode = 2
+access = 2
 use_native_dialog = true
 
 [connection signal="button_down" from="CanvasLayer/VBoxContainer/HBoxContainer/box" to="state_machine_tools" method="_on_box_button_down"]

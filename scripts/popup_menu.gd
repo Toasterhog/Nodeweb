@@ -3,15 +3,15 @@ extends PopupMenu
 @onready var save_dialog: FileDialog = $"../../save_load_node/SaveDialog"
 
 
-
-
-
 func _on_save_button_up() -> void:
 	popup_centered()
 	if not save_dialog.path:
 		set_item_disabled(2, true)
+		set_item_text(2, "latest")
 	else:
 		set_item_disabled(2, false)
+		var ending_of_path : String = save_dialog.path.split("/", true)[-1]
+		set_item_text(2, "latest: %s" %ending_of_path)
 
 
 func _on_index_pressed(index: int) -> void:

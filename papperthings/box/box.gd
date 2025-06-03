@@ -12,7 +12,7 @@ signal moved  # Emits when the box moves
 @onready var VBC: VBoxContainer = $VBoxContainer
 @onready var HBC: HBoxContainer = $VBoxContainer/HBoxContainer
 @onready var TE: TextEdit = $VBoxContainer/TextEdit
-@onready var LE: TextEdit = $VBoxContainer/HBoxContainer/LineEdit
+@onready var LE: TextEdit = $VBoxContainer/LineEdit
 
 
 var is_dragging := false
@@ -106,16 +106,13 @@ func _gui_input(event: InputEvent) -> void:
 	
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and state_machine.current_state.name == "ToolColor": #color
 			var col = state_machine.get_node("tool_add_box").default_color
-			self_modulate = col
-			$VBoxContainer/HBoxContainer/ColorPickerButton.color = col
+			set_color(col)
 
 func show_notes():
 	if TE.visible:
 		TE.visible = false
-		$VBoxContainer/HBoxContainer/ColorPickerButton.visible = false
 	else:
 		TE.visible = true
-		$VBoxContainer/HBoxContainer/ColorPickerButton.visible = true
 	update_vbc_and_panel_size()
 
 func update_vbc_and_panel_size():
@@ -179,9 +176,6 @@ func flow():
 		global_position += velocity
 		moved.emit()
 
-func _on_color_picker_button_popup_closed() -> void:
-	var color = $VBoxContainer/HBoxContainer/ColorPickerButton.color
-	self_modulate = color
 
 func delete_self():
 	pivot_offset = size / 2
@@ -191,3 +185,6 @@ func delete_self():
 
 func _exit_tree() -> void:
 	IdManager.release_id(id)
+
+func set_color(color : Color):
+	self_modulate = color #chjange this
