@@ -187,4 +187,4 @@ func _exit_tree() -> void:
 	IdManager.release_id(id)
 
 func set_color(color : Color):
-	self_modulate = color #chjange this
+	self_modulate = color

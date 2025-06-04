@@ -9,6 +9,5 @@ func unhandled_input(event):
 				var box = preload("uid://wfnqhd3r5fxx").instantiate()
 				box.position = $"../../papper".get_global_mouse_position() - box.size/2
 				box.self_modulate = default_color
-				#box.get_node("VBoxContainer/HBoxContainer/ColorPickerButton").color = default_color
 				box_holder.add_child(box)
 				

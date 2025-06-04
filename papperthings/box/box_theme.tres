@@ -1,9 +1,0 @@
-[gd_resource type="Theme" load_steps=3 format=3 uid="uid://bja0qgixv3n7q"]
-
-[ext_resource type="StyleBox" uid="uid://bpgb76j1gytm4" path="res://papperthings/box/LineEdit.tres" id="1_nl7eb"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jnfxe"]
-
-[resource]
-TextEdit/styles/focus = SubResource("StyleBoxEmpty_jnfxe")
-TextEdit/styles/normal = ExtResource("1_nl7eb")

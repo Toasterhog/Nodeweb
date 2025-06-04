@@ -1,13 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://wfnqhd3r5fxx"]
+[gd_scene load_steps=6 format=3 uid="uid://wfnqhd3r5fxx"]
 
 [ext_resource type="Script" uid="uid://7gx01op71qhq" path="res://papperthings/box/box.gd" id="1_p41sv"]
-[ext_resource type="Theme" uid="uid://bja0qgixv3n7q" path="res://papperthings/box/box_theme.tres" id="2_hwf1r"]
-[ext_resource type="StyleBox" uid="uid://dy5xcm4jxhkpt" path="res://papperthings/box/TextEdit.tres" id="3_hwf1r"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wcjw6"]
 bg_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
+corner_radius_top_left = 3
+corner_radius_top_right = 3
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 shadow_color = Color(0, 0, 0, 0.501961)
@@ -21,10 +19,10 @@ shadow_offset = Vector2(5, 10)
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wcjw6"]
 
 [node name="base" type="Panel"]
-self_modulate = Color(0.0299, 0.11661, 0.23, 1)
+self_modulate = Color(0.109573, 0.49969, 0.652344, 1)
 custom_minimum_size = Vector2(200, 46)
 offset_right = 200.0
-offset_bottom = 93.0
+offset_bottom = 46.0
 focus_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_wcjw6")
 script = ExtResource("1_p41sv")
@@ -42,7 +40,7 @@ shape = SubResource("RectangleShape2D_t8o5h")
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 1
 offset_right = 200.0
-offset_bottom = 38.0
+offset_bottom = 100.0
 mouse_filter = 2
 
 [node name="LineEdit" type="TextEdit" parent="VBoxContainer"]
@@ -52,10 +50,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 focus_neighbor_bottom = NodePath("../TextEdit")
 mouse_filter = 1
-theme = ExtResource("2_hwf1r")
 theme_override_font_sizes/font_size = 24
 theme_override_styles/focus = SubResource("StyleBoxEmpty_ryaet")
-placeholder_text = "title"
 context_menu_enabled = false
 emoji_menu_enabled = false
 wrap_mode = 1
@@ -64,14 +60,13 @@ scroll_fit_content_width = true
 caret_blink = true
 
 [node name="TextEdit" type="TextEdit" parent="VBoxContainer"]
+visible = false
 clip_contents = false
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 focus_neighbor_top = NodePath("../LineEdit")
 mouse_filter = 1
-theme_override_styles/normal = ExtResource("3_hwf1r")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_wcjw6")
-placeholder_text = "gibberish"
 context_menu_enabled = false
 scroll_fit_content_height = true
 scroll_fit_content_width = true
