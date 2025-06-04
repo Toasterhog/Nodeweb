@@ -1,0 +1,13 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://bjj81ehc027iq"]
+
+[ext_resource type="Texture2D" uid="uid://mxy4qg5n5uy2" path="res://papperthings/box/7ght6K.png" id="1_jb815"]
+
+[resource]
+texture = ExtResource("1_jb815")
+texture_margin_left = 46.0
+texture_margin_top = 45.0
+texture_margin_right = 46.0
+texture_margin_bottom = 45.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+region_rect = Rect2(195, 195, 186, 186)

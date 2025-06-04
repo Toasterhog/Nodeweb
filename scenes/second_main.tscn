@@ -122,7 +122,7 @@ self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(31, 0)
 layout_mode = 2
 flat = true
-color = Color(0.0494, 0.19266, 0.38, 1)
+color = Color(0.854902, 0.458824, 0.145098, 1)
 
 [node name="Button" type="Button" parent="CanvasLayer/VBoxContainer/HBoxContainer2/ColorPickerButton"]
 layout_mode = 1
