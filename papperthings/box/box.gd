@@ -117,6 +117,7 @@ func show_notes():
 
 func update_vbc_and_panel_size():
 	VBC.size = Vector2.ZERO
+	await get_tree().process_frame
 	size = VBC.size
 	middlepos = global_position + size/2
 	moved.emit()

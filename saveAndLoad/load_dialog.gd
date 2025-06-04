@@ -34,6 +34,7 @@ func palce_to_papper():
 	var A_LE := res.LineText
 	var A_TE := res.BodyText
 	var A_ex := res.expanded
+	
 	var LinkS := res.link_sb
 	var LinkE := res.link_eb
 	
@@ -46,20 +47,17 @@ func palce_to_papper():
 	for i in A_position.size():
 		
 		var box := BOX.instantiate()
-		var LE := box.get_node("VBoxContainer/HBoxContainer/LineEdit")
+		var LE := box.get_node("VBoxContainer/LineEdit")
 		var TE := box.get_node("VBoxContainer/TextEdit")
-		var CP := box.get_node("VBoxContainer/HBoxContainer/ColorPickerButton")
 		
 		LE.text = A_LE[i]
 		TE.text = A_TE[i]
-		CP.color = A_color[i]
 		box.self_modulate = A_color[i]
 		box.position = A_position[i]
 		box.get_node("VBoxContainer/TextEdit").visible = A_ex[i]
-		box.get_node("VBoxContainer/HBoxContainer/ColorPickerButton").visible = A_ex[i]
 		box.id = A_id[i] + 1000
 		box_holder.add_child(box)
-		box.update_vbc_and_panel_size() #ATTENTION
+		box.update_vbc_and_panel_size()
 		
 	for i in LinkS.size():
 		var link = LINK.instantiate()

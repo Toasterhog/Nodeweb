@@ -4,10 +4,10 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wcjw6"]
 bg_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 3
-corner_radius_top_right = 3
+corner_radius_top_left = 5
+corner_radius_top_right = 5
 corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
+corner_radius_bottom_left = 4
 shadow_color = Color(0, 0, 0, 0.501961)
 shadow_size = 10
 shadow_offset = Vector2(5, 10)
@@ -19,10 +19,10 @@ shadow_offset = Vector2(5, 10)
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wcjw6"]
 
 [node name="base" type="Panel"]
-self_modulate = Color(0.109573, 0.49969, 0.652344, 1)
-custom_minimum_size = Vector2(200, 46)
+self_modulate = Color(0.1105, 0.497142, 0.65, 1)
+custom_minimum_size = Vector2(200, 45.39)
 offset_right = 200.0
-offset_bottom = 46.0
+offset_bottom = 45.39
 focus_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_wcjw6")
 script = ExtResource("1_p41sv")
@@ -52,6 +52,7 @@ focus_neighbor_bottom = NodePath("../TextEdit")
 mouse_filter = 1
 theme_override_font_sizes/font_size = 24
 theme_override_styles/focus = SubResource("StyleBoxEmpty_ryaet")
+placeholder_text = "box"
 context_menu_enabled = false
 emoji_menu_enabled = false
 wrap_mode = 1
@@ -67,6 +68,7 @@ layout_mode = 2
 focus_neighbor_top = NodePath("../LineEdit")
 mouse_filter = 1
 theme_override_styles/focus = SubResource("StyleBoxEmpty_wcjw6")
+placeholder_text = "gibberish"
 context_menu_enabled = false
 scroll_fit_content_height = true
 scroll_fit_content_width = true
