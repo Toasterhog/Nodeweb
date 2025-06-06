@@ -1,13 +1,12 @@
-[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://tunkcckfrswo"]
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://b4f64yi0e31ql"]
 
-[ext_resource type="Texture2D" uid="uid://ymumswacs2hf" path="res://papperthings/box/box6_200.png" id="1_ca2ua"]
+[ext_resource type="Texture2D" uid="uid://bb7ksexsmvetd" path="res://papperthings/box/box6_300.png" id="1_6vdj4"]
 
 [resource]
-texture = ExtResource("1_ca2ua")
-texture_margin_left = 14.0
-texture_margin_top = 13.0
-texture_margin_right = 12.0
-texture_margin_bottom = 12.0
+texture = ExtResource("1_6vdj4")
+texture_margin_left = 27.0
+texture_margin_top = 27.0
+texture_margin_right = 27.0
+texture_margin_bottom = 27.0
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
-region_rect = Rect2(0, 0, 90, 90)

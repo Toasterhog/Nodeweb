@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://wfnqhd3r5fxx"]
 
-[ext_resource type="StyleBox" uid="uid://b4f64yi0e31ql" path="res://papperthings/box/box_5.tres" id="1_hwf1r"]
+[ext_resource type="StyleBox" uid="uid://tunkcckfrswo" path="res://papperthings/box/box5.tres" id="1_hwf1r"]
 [ext_resource type="Script" uid="uid://7gx01op71qhq" path="res://papperthings/box/box.gd" id="1_p41sv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t8o5h"]
@@ -17,9 +17,9 @@ content_margin_left = 4.0
 
 [node name="base" type="Panel"]
 texture_filter = 1
-custom_minimum_size = Vector2(196, 87)
-offset_right = 196.0
-offset_bottom = 98.0
+custom_minimum_size = Vector2(174, 62)
+offset_right = 174.0
+offset_bottom = 62.0
 focus_mode = 2
 theme_override_styles/panel = ExtResource("1_hwf1r")
 script = ExtResource("1_p41sv")
@@ -40,10 +40,10 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 21.0
-offset_top = 21.0
-offset_right = -21.0
-offset_bottom = -21.0
+offset_left = 12.0
+offset_top = 12.0
+offset_right = -12.0
+offset_bottom = -12.0
 mouse_filter = 2
 
 [node name="LineEdit" type="TextEdit" parent="VBoxContainer"]
@@ -78,6 +78,18 @@ context_menu_enabled = false
 scroll_fit_content_height = true
 scroll_fit_content_width = true
 caret_blink = true
+
+[node name="Button_scale_LE" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -9.0
+offset_top = 24.0
+offset_right = 6.0
+offset_bottom = 47.0
+grow_horizontal = 0
+grow_vertical = 2
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

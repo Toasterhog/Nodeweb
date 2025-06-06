@@ -43,29 +43,31 @@ func save_doc_to_path():
 	button_animate.emit()
 	var document = DOCUMENT_PRESET_RESOURCE.duplicate()
 	
-	var length := box_holder.get_child_count()
-	document.id.resize(length)
-	document.pos.resize(length)
-	document.color.resize(length)
-	document.LineText.resize(length)
-	document.BodyText.resize(length)
-	document.expanded.resize(length)
+	var boxhcc := box_holder.get_child_count()
+	document.id.resize(boxhcc)
+	document.pos.resize(boxhcc)
+	document.color.resize(boxhcc)
+	document.LineText.resize(boxhcc)
+	document.BodyText.resize(boxhcc)
+	document.expanded.resize(boxhcc)
 	
-	document.link_sb.resize(link_holder.get_child_count())
-	document.link_eb.resize(link_holder.get_child_count())
+	var linkhcc := link_holder.get_child_count()
+	document.link_sb.resize(linkhcc)
+	document.link_eb.resize(linkhcc)
 	
-	document.bundle_id.resize(bundle_holder.get_child_count())
-	document.bundle_pos.resize(bundle_holder.get_child_count())
-	document.bundle_size.resize(bundle_holder.get_child_count())
-	document.bundle_color.resize(bundle_holder.get_child_count())
-	document.bundle_label.resize(bundle_holder.get_child_count())
+	var bundlehcc:= bundle_holder.get_child_count()
+	document.bundle_id.resize(bundlehcc)
+	document.bundle_pos.resize(bundlehcc)
+	document.bundle_size.resize(bundlehcc)
+	document.bundle_color.resize(bundlehcc)
+	document.bundle_label.resize(bundlehcc)
 	
 	for b in box_holder.get_children():
 		var i = b.get_index()
 		document.id[i] = b.id
 		document.pos[i] = b.position
 		document.color[i] = b.self_modulate
-		document.LineText[i] = b.get_node("VBoxContainer/HBoxContainer/LineEdit").text
+		document.LineText[i] = b.get_node("VBoxContainer/LineEdit").text
 		document.BodyText[i] = b.get_node("VBoxContainer/TextEdit").text
 		document.expanded[i] = b.get_node("VBoxContainer/TextEdit").visible
 	

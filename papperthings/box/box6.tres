@@ -1,0 +1,13 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://caplknhnqyj7k"]
+
+[ext_resource type="Texture2D" uid="uid://db42j0tbphv2p" path="res://papperthings/box/box10_300.png" id="1_dnoe3"]
+
+[resource]
+texture = ExtResource("1_dnoe3")
+texture_margin_left = 24.0
+texture_margin_top = 24.0
+texture_margin_right = 21.0
+texture_margin_bottom = 21.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+region_rect = Rect2(3, 3, 90, 90)

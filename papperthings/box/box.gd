@@ -117,7 +117,7 @@ func show_notes():
 
 func update_vbc_and_panel_size():
 	VBC.size = Vector2.ZERO
-	size = VBC.size + Vector2(50,50) #ATTENTION
+	size = VBC.size + Vector2(24,24) #ATTENTION box specific
 	middlepos = global_position + size/2
 	moved.emit()
 
