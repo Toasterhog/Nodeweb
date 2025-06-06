@@ -1,15 +1,17 @@
 [gd_scene load_steps=8 format=3 uid="uid://wfnqhd3r5fxx"]
 
-[ext_resource type="StyleBox" uid="uid://bjj81ehc027iq" path="res://papperthings/box/LineEdit_texture.tres" id="1_hwf1r"]
+[ext_resource type="StyleBox" uid="uid://b4f64yi0e31ql" path="res://papperthings/box/box_5.tres" id="1_hwf1r"]
 [ext_resource type="Script" uid="uid://7gx01op71qhq" path="res://papperthings/box/box.gd" id="1_p41sv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t8o5h"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u8cex"]
+content_margin_left = 4.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ryaet"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5xt5q"]
+content_margin_left = 4.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wcjw6"]
 
@@ -17,7 +19,7 @@
 texture_filter = 1
 custom_minimum_size = Vector2(196, 87)
 offset_right = 196.0
-offset_bottom = 87.0
+offset_bottom = 98.0
 focus_mode = 2
 theme_override_styles/panel = ExtResource("1_hwf1r")
 script = ExtResource("1_p41sv")
@@ -38,9 +40,9 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 25.0
+offset_left = 21.0
 offset_top = 21.0
-offset_right = -25.0
+offset_right = -21.0
 offset_bottom = -21.0
 mouse_filter = 2
 
