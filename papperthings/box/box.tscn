@@ -1,25 +1,29 @@
-[gd_scene load_steps=8 format=3 uid="uid://wfnqhd3r5fxx"]
+[gd_scene load_steps=7 format=3 uid="uid://wfnqhd3r5fxx"]
 
 [ext_resource type="StyleBox" uid="uid://tunkcckfrswo" path="res://papperthings/box/box5.tres" id="1_hwf1r"]
 [ext_resource type="Script" uid="uid://7gx01op71qhq" path="res://papperthings/box/box.gd" id="1_p41sv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t8o5h"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u8cex"]
-content_margin_left = 4.0
-
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ryaet"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5xt5q"]
-content_margin_left = 4.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wcjw6"]
 
+[sub_resource type="GDScript" id="GDScript_p41sv"]
+script/source = "extends ReferenceRect
+
+@onready var v_box_container: VBoxContainer = $\"../VBoxContainer\"
+
+func _process(delta: float) -> void:
+	size = v_box_container.size
+	position = v_box_container.position
+"
+
 [node name="base" type="Panel"]
 texture_filter = 1
-custom_minimum_size = Vector2(174, 62)
+custom_minimum_size = Vector2(174, 63)
 offset_right = 174.0
-offset_bottom = 62.0
+offset_bottom = 63.0
 focus_mode = 2
 theme_override_styles/panel = ExtResource("1_hwf1r")
 script = ExtResource("1_p41sv")
@@ -35,7 +39,6 @@ shape = SubResource("RectangleShape2D_t8o5h")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 texture_filter = 2
-custom_minimum_size = Vector2(0, 38)
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0
@@ -48,30 +51,25 @@ mouse_filter = 2
 
 [node name="LineEdit" type="TextEdit" parent="VBoxContainer"]
 clip_contents = false
-custom_minimum_size = Vector2(150, 0)
+custom_minimum_size = Vector2(150, 39)
 layout_mode = 2
-size_flags_horizontal = 3
 focus_neighbor_bottom = NodePath("../TextEdit")
 mouse_filter = 1
 theme_override_font_sizes/font_size = 24
-theme_override_styles/normal = SubResource("StyleBoxEmpty_u8cex")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_ryaet")
 placeholder_text = "title"
 context_menu_enabled = false
-emoji_menu_enabled = false
 wrap_mode = 1
 scroll_fit_content_height = true
-scroll_fit_content_width = true
 caret_blink = true
 
 [node name="TextEdit" type="TextEdit" parent="VBoxContainer"]
 visible = false
 clip_contents = false
-custom_minimum_size = Vector2(0, 50)
+custom_minimum_size = Vector2(150, 35)
 layout_mode = 2
 focus_neighbor_top = NodePath("../LineEdit")
 mouse_filter = 1
-theme_override_styles/normal = SubResource("StyleBoxEmpty_5xt5q")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_wcjw6")
 placeholder_text = "gibberish"
 context_menu_enabled = false
@@ -84,14 +82,26 @@ layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
 anchor_right = 1.0
+anchor_bottom = 1.0
 offset_left = -9.0
-offset_top = 24.0
-offset_right = 6.0
-offset_bottom = 47.0
+offset_top = 15.0
+offset_right = 3.0
+offset_bottom = 9.0
 grow_horizontal = 0
 grow_vertical = 2
+
+[node name="ReferenceRect" type="ReferenceRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+border_width = 1.6
+editor_only = false
+script = SubResource("GDScript_p41sv")
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
 [connection signal="text_changed" from="VBoxContainer/LineEdit" to="." method="update_vbc_and_panel_size"]
 [connection signal="text_changed" from="VBoxContainer/TextEdit" to="." method="update_vbc_and_panel_size"]
+[connection signal="button_down" from="Button_scale_LE" to="." method="_on_button_scale_le_down"]
+[connection signal="button_up" from="Button_scale_LE" to="." method="_on_button_scale_le_up"]
