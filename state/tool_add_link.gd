@@ -1,10 +1,10 @@
 extends State
 class_name ToolAddLink
 
-var grabbing_box: Panel = null
+var grabbing_box: PanelContainer = null
 var is_dragging: bool = false
 var link_preview: Line2D = null
-var start_box: Panel = null
+var start_box: PanelContainer = null
 @onready var papper: Node2D = $"../../papper"
 @onready var link_scene = preload("uid://bbfr0s07ij6tq")
 @onready var link_holder = $"../../papper/linkHolder"
@@ -51,7 +51,7 @@ func update_preview_line(event: InputEventMouse):
 		var mouse_papper_pos = papper.get_local_mouse_position()
 		link_preview.points = [start_box.middlepos, mouse_papper_pos]
 
-func instantiate_link(box_a: Panel, box_b: Panel):
+func instantiate_link(box_a: PanelContainer, box_b: PanelContainer):
 	var link = link_scene.instantiate()
 	link.start_box = box_a
 	link.end_box = box_b
@@ -71,10 +71,10 @@ func reset_tool():
 		link_preview.queue_free()
 		link_preview = null
 
-func mouse_over_box(box: Panel):
+func mouse_over_box(box: PanelContainer):
 	grabbing_box = box
 
-func check_if_link_pair_doesnt_exists(sb : Panel, eb : Panel) -> bool: #checks if the two boxes has a link between them
+func check_if_link_pair_doesnt_exists(sb : PanelContainer, eb : PanelContainer) -> bool: #checks if the two boxes has a link between them
 	for L: Link in sb.links:
 		if L.start_box == eb or L.end_box == eb:
 			return false
