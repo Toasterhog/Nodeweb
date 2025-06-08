@@ -1,8 +1,8 @@
 extends Node2D
 class_name Link
 
-@export var start_box: Panel
-@export var end_box: Panel
+@export var start_box: PanelContainer
+@export var end_box: PanelContainer
 
 const  default_width := 8.0
 const hover_width := 14.0

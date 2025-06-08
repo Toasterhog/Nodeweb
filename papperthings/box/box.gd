@@ -4,15 +4,15 @@ class_name BoxClass
 @export var id: int = -1
 @export var links: Array = []
 
-signal moved  # Emits when the box moves
+signal moved  
 
 # Find ToolAddLink dynamically to prevent cyclic reference
 @onready var tool_add_link: ToolAddLink = get_tree().get_first_node_in_group("tool_add_link")
 @onready var state_machine := get_node("/root/Main/state_machine_tools")
+@onready var BH: Node2D = get_node("/root/Main/papper/boxHolder")
 @onready var VBC: VBoxContainer = $MarginContainer/VBoxContainer
 @onready var TE: TextEdit = $MarginContainer/VBoxContainer/TextEdit
 @onready var LE: TextEdit = $MarginContainer/VBoxContainer/LineEdit
-
 
 var is_dragging := false
 var is_flowing := true
@@ -23,7 +23,6 @@ var middlepos : Vector2
 var cust_width_fold : float = 0
 var cust_width_expnd : float = 0
 
-@onready var BH: Node2D = get_node("/root/Main/papper/boxHolder")
 
  
 func _ready() -> void:
@@ -32,15 +31,9 @@ func _ready() -> void:
 	add_to_group("boxes")
 	update_vbc_and_panel_size()
 
-#### gui input only called if mouse point is in gui rect
 ### there is a has_point() method
 
 func _input(event: InputEvent) -> void:
-
-	#if mouse_inside and event is InputEventMouseButton and event.double_click and event.button_index == MOUSE_BUTTON_LEFT:
-		#await get_tree().process_frame
-		#var te = $VBoxContainer/TextEdit
-		#te.grab_focus()
 		
 	if TE.has_focus() or LE.has_focus():
 		if (mouse_inside == false and event is InputEventMouseButton and event.pressed\
@@ -70,7 +63,6 @@ func _input(event: InputEvent) -> void:
 
 
 func _process(_delta: float) -> void:
-	
 	if is_dragging:
 		pass
 		global_position = get_global_mouse_position() - drag_offset
@@ -89,20 +81,12 @@ func _process(_delta: float) -> void:
 				i.set_process(true)
 		
 	elif is_scaling:
-		
 		if not TE.visible:
 			cust_width_fold = get_global_mouse_position().x - global_position.x
 			cust_width_fold = maxf(150+24, cust_width_fold)
-			size.x = cust_width_fold
-			#LE.custom_minimum_size.x = 1
-			#LE.size.x = cust_width_fold
 		else:
 			cust_width_expnd = get_global_mouse_position().x - global_position.x
-			cust_width_expnd = max(150+24, cust_width_expnd, 0*TE.custom_minimum_size.x)
-			#TE.custom_minimum_size.x = 1
-			#TE.size.x = cust_width_expnd
-			#LE.size.x = cust_width_expnd
-			size.x = cust_width_expnd
+			cust_width_expnd = max(150+24, cust_width_expnd, TE.get_minimum_size().x + 24)
 		update_vbc_and_panel_size()
 	
 	
@@ -137,41 +121,32 @@ func show_notes():
 	update_vbc_and_panel_size()
 
 func update_vbc_and_panel_size():
-	TE.size = Vector2.ZERO
-	LE.size = Vector2.ZERO
-	size = Vector2.ZERO
-	VBC.size = Vector2.ZERO
-	$MarginContainer.size = Vector2.ZERO
+	var w
+	var wi 
+	
 	if TE.visible == false:
-		var w = maxf(150+24, cust_width_fold)
-		#LE.size.x = w
-		#LE.custom_minimum_size.x = w
-		#TE.size.x = w
-		#VBC.size.x = w
-		size.x = w
-		#LE.size.y = 0
-		#VBC.size.y = LE.size.y 
+		w = maxf(150+24, cust_width_fold)
+		wi = maxf(150, cust_width_fold -24)
+		
 	else:
-		var w = max(150+24 , cust_width_expnd, 0*TE.size.x)
-		size.x = w
-		#VBC.size.x = w
-		#LE.size.x = w
-		#TE.size.x = w
-		#
-		#LE.size.y = 0
-		#TE.size.y = 0
-		#VBC.size.y = 0#LE.size.y + TE.size.y
+		w = maxf(150+24 , cust_width_expnd)
+		wi = maxf(150, cust_width_expnd -24)
 	
-	
-	
-	#VBC.size.x = max(LE.size.x , TE.size.x * int(TE.visible))
-	
-	#LE.size.x = VBC.size.x
-	
-	#await get_tree().process_frame  
-	#size = VBC.size + Vector2(24,24) #ATTENTION style specific
+	LE.size.x = wi
+	TE.size.x = wi
+	VBC.size.x = wi
+	size.x = w
+		
+	LE.size.y = 0
+	await get_tree().process_frame
+	size.y = 0
+	VBC.size.y  = 0
+	TE.size.y  = 0
+
 	middlepos = global_position + size/2
 	moved.emit()
+
+
 	
 
 #@export var curve : Curve
@@ -241,13 +216,8 @@ func _exit_tree() -> void:
 
 func set_color(color : Color):
 	self_modulate = color
-	$Button_scale_LE.modulate = color
 	
 	
-	
-	
-	
-
 
 func _on_button_scale_le_down() -> void:
 	is_scaling = true

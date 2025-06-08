@@ -67,9 +67,9 @@ func save_doc_to_path():
 		document.id[i] = b.id
 		document.pos[i] = b.position
 		document.color[i] = b.self_modulate
-		document.LineText[i] = b.get_node("VBoxContainer/LineEdit").text
-		document.BodyText[i] = b.get_node("VBoxContainer/TextEdit").text
-		document.expanded[i] = b.get_node("VBoxContainer/TextEdit").visible
+		document.LineText[i] = b.get_node("MarginContainer/VBoxContainer/LineEdit").text
+		document.BodyText[i] = b.get_node("MarginContainer/VBoxContainer/TextEdit").text
+		document.expanded[i] = b.get_node("$MarginContainer/VBoxContainer/TextEdit").visible
 	
 	for l in link_holder.get_children():
 		var i = l.get_index()
