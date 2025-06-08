@@ -47,14 +47,14 @@ func palce_to_papper():
 	for i in A_position.size():
 		
 		var box := BOX.instantiate()
-		var LE := box.get_node("VBoxContainer/LineEdit")
-		var TE := box.get_node("VBoxContainer/TextEdit")
+		var LE := box.get_node("MarginContainer/VBoxContainer/LineEdit")
+		var TE := box.get_node("MarginContainer/VBoxContainer/TextEdit")
 		
 		LE.text = A_LE[i]
 		TE.text = A_TE[i]
-		box.self_modulate = A_color[i]
+		box.set_color(A_color[i])
 		box.position = A_position[i]
-		box.get_node("VBoxContainer/TextEdit").visible = A_ex[i]
+		box.get_node("MarginContainer/VBoxContainer/TextEdit").visible = A_ex[i]
 		box.id = A_id[i] + 1000
 		box_holder.add_child(box)
 		box.update_vbc_and_panel_size()

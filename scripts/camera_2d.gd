@@ -1,7 +1,7 @@
 extends Camera2D
 
 var target_zoom := 1.0
-var max_zoom := 2  # furthest in
+var max_zoom := 5  # furthest in
 var min_zoom := 0.3  #furthest out
 var delta_zoom := 0.3 #sensitivity / differance per wheel movement
 var zoom_rate := 10  #speed to follow, lower = dragy and delayed
@@ -37,10 +37,12 @@ func _input(event: InputEvent) -> void: #WARNING ATTENTION this was _unhandled_i
 func zoom_out() -> void:
 	target_zoom = max(target_zoom * (1- delta_zoom), min_zoom)
 	set_physics_process(true)
+	print("(out) target_zoom: " , target_zoom)
 	
 func zoom_in() -> void:
 	target_zoom = min(target_zoom *(1+delta_zoom), max_zoom)
 	set_physics_process(true)
+	print("(in) target_zoom: " , target_zoom)
 
 func _physics_process(delta: float) -> void:
 	zoom = lerp( zoom, target_zoom * Vector2.ONE, zoom_rate * delta )
