@@ -55,6 +55,7 @@ func palce_to_papper():
 		box.set_color(A_color[i])
 		box.position = A_position[i]
 		box.get_node("MarginContainer/VBoxContainer/TextEdit").visible = A_ex[i]
+		box.get_node("MarginContainer/VBoxContainer/HSeparator").visible = A_ex[i]
 		box.id = A_id[i] + 1000
 		box_holder.add_child(box)
 		box.update_vbc_and_panel_size()

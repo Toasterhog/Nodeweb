@@ -116,8 +116,10 @@ func _gui_input(event: InputEvent) -> void:
 func show_notes():
 	if TE.visible:
 		TE.visible = false
+		$MarginContainer/VBoxContainer/HSeparator.visible = false
 	else:
 		TE.visible = true
+		$MarginContainer/VBoxContainer/HSeparator.visible = true
 	update_vbc_and_panel_size()
 
 func update_vbc_and_panel_size():
@@ -216,7 +218,7 @@ func _exit_tree() -> void:
 
 func set_color(color : Color):
 	self_modulate = color
-	
+	$MarginContainer/VBoxContainer/HSeparator.modulate = color
 	
 
 func _on_button_scale_le_down() -> void:

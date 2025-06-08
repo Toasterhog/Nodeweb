@@ -8,14 +8,10 @@ setting for mac mode
 
 ## Appearance  
 bundle/panelcontainer resise to fit text, bundle resise to fit panelcontainer  
-box color button - hide alfa checkboardpattern  
-box - inverse color brightness  
-box panel size
 
 ## QoL
 bundle z-sorting - paused  
 (delete bundles by sweeping)  
-resizable box title textedit  
 visual indicator of delete tool hover  
 infinite canvas and decreased min zoom  
 
@@ -35,3 +31,5 @@ clear button - clear bundles
 screen size adjust  
 update id_manager.next_id after loading document  
 save_latest path should update when loading file
+(box - inverse color brightness)  
+resizable box title textedit 
