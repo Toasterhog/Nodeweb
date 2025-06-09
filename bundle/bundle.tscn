@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bhwvnws1rjko1"]
+[gd_scene load_steps=7 format=3 uid="uid://bhwvnws1rjko1"]
 
 [ext_resource type="Script" uid="uid://0qftln2sxev6" path="res://bundle/bundle.gd" id="1_e8frx"]
 [ext_resource type="StyleBox" uid="uid://spy3hb58k6gf" path="res://bundle/stf_pixel.tres" id="2_7y1ch"]
@@ -11,6 +11,9 @@ corner_radius_top_left = 25
 corner_radius_bottom_right = 20
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8skqq"]
+content_margin_left = 24.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7y1ch"]
 
 [node name="Bundle" type="Control"]
 layout_mode = 3
@@ -62,25 +65,21 @@ mouse_default_cursor_shape = 12
 theme = ExtResource("3_8skqq")
 action_mode = 0
 
-[node name="PanelContainer" type="Panel" parent="."]
+[node name="PanelContainer" type="PanelContainer" parent="."]
 layout_mode = 0
 offset_left = 10.0
 offset_top = 10.0
-offset_right = 132.0
+offset_right = 130.0
 offset_bottom = 60.0
 mouse_filter = 2
 mouse_default_cursor_shape = 13
 theme_override_styles/panel = SubResource("StyleBoxFlat_8skqq")
 
 [node name="TextEdit" type="TextEdit" parent="PanelContainer"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 20.0
-size_flags_horizontal = 4
+layout_mode = 2
 theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxEmpty_8skqq")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_7y1ch")
 placeholder_text = "Bundle"
 scroll_fit_content_height = true
 scroll_fit_content_width = true
@@ -91,3 +90,4 @@ scroll_fit_content_width = true
 [connection signal="pressed" from="Panel/drag_button" to="." method="_on_drag_button_pressed"]
 [connection signal="button_up" from="Panel/drag_button2" to="." method="_on_drag_button_2_button_up"]
 [connection signal="pressed" from="Panel/drag_button2" to="." method="_on_drag_button_2_pressed"]
+[connection signal="minimum_size_changed" from="PanelContainer" to="." method="_on_panel_container_minimum_size_changed"]

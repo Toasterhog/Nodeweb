@@ -4,7 +4,6 @@
 tuch pad support
 
 ## Appearance  
-bundle/panelcontainer resise to fit text, bundle resise to fit panelcontainer  
 
 ## QoL
 bundle z-sorting - paused  
@@ -32,4 +31,5 @@ setting for mac mode
 - open/close boxes with cmd + lmb  
 visual indicator of delete tool hover  
 decreased min zoom 
-zoom to/away from mouse
+zoom to/away from mouse  
+bundle/panelcontainer resise to fit text, bundle resise to fit panelcontainer 

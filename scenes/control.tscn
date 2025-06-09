@@ -1,0 +1,41 @@
+[gd_scene load_steps=2 format=3 uid="uid://dd1bo5gcpf71o"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_cr3o2"]
+load_path = "res://.godot/imported/corner.png-918a3ede3631bc7ce842a902218a6468.ctex"
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.345
+anchor_bottom = 0.392
+offset_right = -4.44003
+offset_bottom = -8.01601
+mouse_filter = 2
+
+[node name="Button" type="Button" parent="PanelContainer"]
+texture_filter = 1
+custom_minimum_size = Vector2(30, 30)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+icon = SubResource("CompressedTexture2D_cr3o2")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="TextEdit" type="TextEdit" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.082
+anchor_bottom = 0.063
+offset_right = 0.535995
+offset_bottom = 0.175999
+placeholder_text = "Incloser"
