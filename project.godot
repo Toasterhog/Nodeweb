@@ -20,6 +20,7 @@ config/icon="uid://cxqtckhptf5r7"
 [autoload]
 
 IdManager="*res://scripts/id_manager.gd"
+SettingsAndDataManager="*res://scripts/SettingsAndDataManager.gd"
 
 [display]
 

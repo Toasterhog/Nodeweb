@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://dvarak1c2jild"]
+[gd_scene load_steps=24 format=3 uid="uid://dvarak1c2jild"]
 
 [ext_resource type="Texture2D" uid="uid://bwnp541db5h2r" path="res://zmiscellaneous/canvasbackround.png" id="2_lgaoh"]
 [ext_resource type="Script" uid="uid://be4x5mqb1hwnc" path="res://controls/save_button.gd" id="3_dslak"]
@@ -19,6 +19,7 @@
 [ext_resource type="Script" uid="uid://b0xc8u2lyy4dv" path="res://saveAndLoad/load_dialog.gd" id="12_x4i5i"]
 [ext_resource type="Script" uid="uid://sm8xxnbtvc50" path="res://state/tool_add_bundle.gd" id="15_dslak"]
 [ext_resource type="Script" uid="uid://dbxxaawg3f7lh" path="res://state/tool_color.gd" id="16_nhe3j"]
+[ext_resource type="Script" uid="uid://bt1uvpjoevast" path="res://scripts/SettingsAndDataManager.gd" id="20_tcmv2"]
 
 [sub_resource type="Curve" id="Curve_nhe3j"]
 _data = [Vector2(0, 0.5), 0.0, 0.0, 0, 0, Vector2(0.140909, 0.213483), 0.0, 0.0, 0, 0, Vector2(0.245455, 0.94382), 0.0, 0.0, 0, 0, Vector2(0.372727, 0.0224719), 0.0, 0.0, 0, 0, Vector2(0.513636, 0.842697), 0.0, 0.0, 0, 0, Vector2(0.65, 0.224719), 0.0, 0.0, 0, 0, Vector2(0.781818, 0.719101), 0.0, 0.0, 0, 0, Vector2(1, 0.516854), 0.0, 0.0, 0, 0]
@@ -236,6 +237,9 @@ ok_button_text = "Select Current Folder"
 file_mode = 2
 access = 2
 use_native_dialog = true
+
+[node name="Node" type="Node" parent="."]
+script = ExtResource("20_tcmv2")
 
 [connection signal="button_down" from="CanvasLayer/VBoxContainer/HBoxContainer/box" to="state_machine_tools" method="_on_box_button_down"]
 [connection signal="button_down" from="CanvasLayer/VBoxContainer/HBoxContainer/link" to="state_machine_tools" method="_on_link_button_down"]

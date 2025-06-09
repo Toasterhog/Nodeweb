@@ -12,7 +12,15 @@ func _ready() -> void:
 	
 
 
-func _input(event: InputEvent) -> void: #WARNING ATTENTION this was _unhandled_input before
+func _input(event: InputEvent) -> void: 
+	if SettingsAndDataManager.OSmode == &"mac":
+		mac_input(event)
+	else:
+		windows_input(event)
+	
+	
+	
+func windows_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		if event.button_mask == MOUSE_BUTTON_MASK_MIDDLE:
 			position -= event.relative / zoom 
@@ -31,18 +39,48 @@ func _input(event: InputEvent) -> void: #WARNING ATTENTION this was _unhandled_i
 				zoom_in()
 			if event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 				zoom_out()
+
+
+func mac_input(event: InputEvent) -> void:
 	
+	if Input.is_key_pressed(KEY_META):
+		if event.is_action_pressed("ui_up", true):
+			zoom_in()
+		if event.is_action_pressed("ui_down", true):
+			zoom_out()
+	
+	elif event is InputEventKey and (event.is_action_pressed("ui_left")
+	or event.is_action_pressed("ui_right")
+	or event.is_action_pressed("ui_up")
+	or event.is_action_pressed("ui_down")):
+		set_process(true)
+
+		
+func _process(delta: float) -> void:
+	var direction : = Vector2.ZERO
+	direction.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+	direction.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+		
+	position += direction * 7 / zoom 
+	position = position.clamp(
+		Vector2(
+			limit_left + 0.5 * viewport_size.x/ zoom.x, 
+			limit_top + 0.5 * viewport_size.y/ zoom.y), 
+		Vector2(
+			limit_right - 0.5 * viewport_size.x/ zoom.x ,
+			limit_bottom - 0.5 * viewport_size.y/ zoom.y))
+			
+	if direction == Vector2.ZERO:
+		set_process(false)
 
 
 func zoom_out() -> void:
 	target_zoom = max(target_zoom * (1- delta_zoom), min_zoom)
 	set_physics_process(true)
-	print("(out) target_zoom: " , target_zoom)
 	
 func zoom_in() -> void:
 	target_zoom = min(target_zoom *(1+delta_zoom), max_zoom)
 	set_physics_process(true)
-	print("(in) target_zoom: " , target_zoom)
 
 func _physics_process(delta: float) -> void:
 	zoom = lerp( zoom, target_zoom * Vector2.ONE, zoom_rate * delta )
