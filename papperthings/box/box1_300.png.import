@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://6nannn3nmlpd"
-path="res://.godot/imported/LE_scale_button.png-bd44751b3f89799b2b54d33280341a96.ctex"
+uid="uid://dxjuxvy81ey3x"
+path="res://.godot/imported/box1_300.png-88325351ca1c44017a4d1eb6118f866b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://papperthings/box/LE_scale_button.png"
-dest_files=["res://.godot/imported/LE_scale_button.png-bd44751b3f89799b2b54d33280341a96.ctex"]
+source_file="res://papperthings/box/box1_300.png"
+dest_files=["res://.godot/imported/box1_300.png-88325351ca1c44017a4d1eb6118f866b.ctex"]
 
 [params]
 

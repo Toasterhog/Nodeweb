@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://wfnqhd3r5fxx"]
 
-[ext_resource type="StyleBox" uid="uid://tunkcckfrswo" path="res://papperthings/box/box5.tres" id="1_hwf1r"]
+[ext_resource type="StyleBox" uid="uid://tunkcckfrswo" path="res://papperthings/box/box5_the_choosen_one.tres" id="1_hwf1r"]
 [ext_resource type="Script" uid="uid://7gx01op71qhq" path="res://papperthings/box/box.gd" id="1_p41sv"]
 [ext_resource type="Texture2D" uid="uid://b1fvpqk3s7sgg" path="res://papperthings/box/box9_300.png" id="3_hwf1r"]
 
