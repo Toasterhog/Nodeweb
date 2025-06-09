@@ -13,7 +13,7 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void: 
-	if SettingsAndDataManager.OSmode == &"mac":
+	if IdManager.OSmode == &"mac":
 		mac_input(event)
 	else:
 		windows_input(event)

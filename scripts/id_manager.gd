@@ -22,3 +22,7 @@ func reset_ids() -> void:
 	for i in bh.get_child_count():
 		bh.get_child(i).id = i
 		next_id = i+1
+
+
+#not related to id stuff
+var OSmode := &"windows"

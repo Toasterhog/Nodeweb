@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ConfigRes" load_steps=2 format=3 uid="uid://dib5k6nd1co0j"]
+
+[ext_resource type="Script" uid="uid://8wf4c3bjr4t" path="res://settings/ConfigRes.gd" id="1_h0wrr"]
+
+[resource]
+script = ExtResource("1_h0wrr")
+def_color = Color(0, 0, 0, 1)
+swatches = Array[Color]([])
+OSmode = &""
+metadata/_custom_type_script = "uid://8wf4c3bjr4t"
