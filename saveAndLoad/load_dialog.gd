@@ -44,6 +44,7 @@ func palce_to_papper():
 	var Bcolor := res.bundle_color
 	var Blabel := res.bundle_label
 	
+	var c : Camera2D = $"../../papper/Camera2D"
 	for i in A_position.size():
 		
 		var box := BOX.instantiate()
@@ -54,6 +55,7 @@ func palce_to_papper():
 		TE.text = A_TE[i]
 		box.set_color(A_color[i])
 		box.position = A_position[i]
+		box.position = box.position.clamp(Vector2(c.limit_left,c.limit_top),Vector2(c.limit_right -300,c.limit_bottom - 300))
 		box.get_node("MarginContainer/VBoxContainer/TextEdit").visible = A_ex[i]
 		box.get_node("MarginContainer/VBoxContainer/HSeparator").visible = A_ex[i]
 		box.id = A_id[i] + 1000

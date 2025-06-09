@@ -69,7 +69,7 @@ func save_doc_to_path():
 		document.color[i] = b.self_modulate
 		document.LineText[i] = b.get_node("MarginContainer/VBoxContainer/LineEdit").text
 		document.BodyText[i] = b.get_node("MarginContainer/VBoxContainer/TextEdit").text
-		document.expanded[i] = b.get_node("$MarginContainer/VBoxContainer/TextEdit").visible
+		document.expanded[i] = b.get_node("MarginContainer/VBoxContainer/TextEdit").visible #error here
 	
 	for l in link_holder.get_children():
 		var i = l.get_index()
