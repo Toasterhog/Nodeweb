@@ -2,7 +2,7 @@ extends Control
 class_name BundleClass
 
 @onready var state_machine: Node = get_node("/root/Main/state_machine_tools")
-
+@onready var BuH: Node2D = get_node("/root/Main/papper/bundleHolder")
 var id = -1
 
 var is_dragging := false
@@ -18,8 +18,9 @@ var half_drag_button_width = 17.5
 @onready var drag_button_1: Button = $Panel/drag_button
 @onready var drag_button_2: Button = $Panel/drag_button2
 @onready var text_edit: TextEdit = $PanelContainer/TextEdit
+var color_normal
+var color_delete_indicator := Color(0.8,0,0,1)
 
-@onready var BuH: Node2D = get_node("/root/Main/papper/bundleHolder")
 
  
 func _ready() -> void:
@@ -27,22 +28,8 @@ func _ready() -> void:
 		id = IdManager.get_new_id()
 	#add_to_group("bundles")
 	var smtn = get_node("/root/Main/state_machine_tools")
-	print("smtn: ",smtn)
 	smtn.ToolChanged.connect(tool_changed)
 	
-
-
-func n_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton:
-		if state_machine.current_state.name == "ToolAddBundle"  and event.button_index == MOUSE_BUTTON_LEFT\
-		or state_machine.current_state.name == "tool_edit" and event.button_index == MOUSE_BUTTON_RIGHT:
-			if event.pressed  and mouse_inside:
-				is_dragging = true
-				set_process(true)
-				drag_offset = get_global_mouse_position() - global_position
-			elif not event.pressed:
-				is_dragging = false
-				
 	
 
 
@@ -65,11 +52,17 @@ func _process(_delta: float) -> void:
 		set_process(false)
 
 func _on_mouse_entered() -> void:
+	print("hej")
 	mouse_inside = true
 	mouse_default_cursor_shape = Control.CURSOR_MOVE
+	if state_machine.current_state.name == "tool_delete":
+		color_normal = panel.modulate
+		panel.modulate = color_delete_indicator
 
 func _on_mouse_exited() -> void:
 	mouse_inside = false
+	if state_machine.current_state.name == "tool_delete":
+		panel.modulate = color_normal
 
 func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:

@@ -22,6 +22,8 @@ var mouse_inside := false
 var middlepos : Vector2
 var cust_width_fold : float = 0
 var cust_width_expnd : float = 0
+var color_default : Color
+var color_delete_indicate := Color(0.9, 0.1, 0.1, 1)
 
 
  
@@ -31,7 +33,6 @@ func _ready() -> void:
 	add_to_group("boxes")
 	update_vbc_and_panel_size()
 
-### there is a has_point() method
 
 func _input(event: InputEvent) -> void:
 		
@@ -56,8 +57,8 @@ func _input(event: InputEvent) -> void:
 				is_dragging = false
 				is_flowing = true
 	
-	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_MASK_RIGHT \
-	and event.double_click and mouse_inside:
+	if event is InputEventMouseButton and event.pressed and mouse_inside and ((event.button_index == MOUSE_BUTTON_MASK_RIGHT \
+	and event.double_click) or Input.is_key_pressed(KEY_META)):
 		show_notes()
 	
 
@@ -88,6 +89,7 @@ func _process(_delta: float) -> void:
 			cust_width_expnd = get_global_mouse_position().x - global_position.x
 			cust_width_expnd = max(150+24, cust_width_expnd, TE.get_minimum_size().x + 24)
 		update_vbc_and_panel_size()
+		
 	
 	
 	elif is_flowing:
@@ -96,13 +98,21 @@ func _process(_delta: float) -> void:
 		set_process(false)
 
 func _on_mouse_entered() -> void:
+	mouse_inside = true
 	if tool_add_link and state_machine.current_state.name == "ToolAddLink":
 		tool_add_link.mouse_over_box(self)
-	mouse_inside = true
+	elif state_machine.current_state.name == "tool_delete":
+		color_default = self_modulate
+		set_color(color_delete_indicate)
+
+
 
 
 func _on_mouse_exited() -> void:
 	mouse_inside = false
+	if state_machine.current_state.name == "tool_delete":
+		set_color(color_default)
+
 
 func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT: #delete
@@ -228,3 +238,7 @@ func _on_button_scale_le_down() -> void:
 
 func _on_button_scale_le_up() -> void:
 	is_scaling = false
+
+##function version of mouse_inside
+func got_mouse() -> bool:
+	return get_global_rect().has_point(get_global_mouse_position())

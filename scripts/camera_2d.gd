@@ -1,8 +1,8 @@
 extends Camera2D
 
 var target_zoom := 1.0
-var max_zoom := 5  # furthest in
-var min_zoom := 0.3  #furthest out
+var max_zoom := 1.5  # furthest in
+var min_zoom := 0.15  #furthest out
 var delta_zoom := 0.3 #sensitivity / differance per wheel movement
 var zoom_rate := 10  #speed to follow, lower = dragy and delayed
 var viewport_size 
@@ -83,5 +83,9 @@ func zoom_in() -> void:
 	set_physics_process(true)
 
 func _physics_process(delta: float) -> void:
+	var global_mouse_before = get_global_mouse_position()
 	zoom = lerp( zoom, target_zoom * Vector2.ONE, zoom_rate * delta )
+	var global_mouse_after = get_global_mouse_position()
+	global_position += (global_mouse_before - global_mouse_after) 
+	
 	set_physics_process(not is_equal_approx(zoom.x, target_zoom))
