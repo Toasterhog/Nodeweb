@@ -48,6 +48,10 @@ func _on_link_button_down() -> void:
 	child_transision("ToolAddLink")
 	vis_indicator_button("link")
 
+func _on_arrow_button_down() -> void:
+	child_transision("ToolAddArrow")
+	vis_indicator_button("arrow")
+
 func _on_bundle_button_down() -> void:
 	child_transision("ToolAddBundle")
 	vis_indicator_button("bundle")
@@ -85,6 +89,7 @@ func main_input(): #ATTENTION this is triggered sometimes when typing text!
 func vis_indicator_button(butt : String):
 	$"../CanvasLayer/VBoxContainer/HBoxContainer/box".modulate = Color(1,1,1)
 	$"../CanvasLayer/VBoxContainer/HBoxContainer/link".modulate = Color(1,1,1)
+	$"../CanvasLayer/VBoxContainer/HBoxContainer/arrow".modulate = Color(1,1,1)
 	$"../CanvasLayer/VBoxContainer/HBoxContainer/bundle".modulate = Color(1,1,1)
 	$"../CanvasLayer/VBoxContainer/HBoxContainer/erasor".modulate = Color(1,1,1)
 	$"../CanvasLayer/VBoxContainer/HBoxContainer/edit".modulate = Color(1,1,1)

@@ -1,13 +1,15 @@
 extends PanelContainer
 class_name BoxClass
 
-@export var id: int = -1
-@export var links: Array = []
+var id: int = -1
+var links: Array = []
+var arrows: Array = [] 
 
 signal moved  
 
 # Find ToolAddLink dynamically to prevent cyclic reference
 @onready var tool_add_link: ToolAddLink = get_tree().get_first_node_in_group("tool_add_link")
+@onready var tool_add_arrow: ToolAddArrow = get_node("/root/Main/state_machine_tools/ToolAddArrow")
 @onready var state_machine := get_node("/root/Main/state_machine_tools")
 @onready var BH: Node2D = get_node("/root/Main/papper/boxHolder")
 @onready var VBC: VBoxContainer = $MarginContainer/VBoxContainer
@@ -101,6 +103,8 @@ func _on_mouse_entered() -> void:
 	mouse_inside = true
 	if tool_add_link and state_machine.current_state.name == "ToolAddLink":
 		tool_add_link.mouse_over_box(self)
+	elif tool_add_arrow and state_machine.current_state.name == "ToolAddArrow":
+		tool_add_arrow.mouse_over_box(self)
 	elif state_machine.current_state.name == "tool_delete":
 		color_default = self_modulate
 		set_color(color_delete_indicate)

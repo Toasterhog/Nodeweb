@@ -31,8 +31,8 @@ func _on_index_pressed(index: int) -> void:
 
 
 func _on_line_edit_text_submitted(new_text: String) -> void:
-	var name : String = $"../pp_SaveName/MarginContainer/vbc/LineEdit".text
-	if save_dialog.name_selected(name):
+	var name_ : String = $"../pp_SaveName/MarginContainer/vbc/LineEdit".text
+	if save_dialog.name_selected(name_):
 		$"../pp_SaveName".hide()
 	
 func UpdateFolderLabel():

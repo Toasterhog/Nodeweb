@@ -61,7 +61,11 @@ func _on_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		if state_machine.current_state.name == "tool_delete":
 			delete_line()
-		
+	
+	if state_machine.current_state.name == "ToolColor" and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+		base_color = state_machine.get_node("ToolAddBundle").default_color
+		line.default_color = base_color
+	
 
 func delete_line():
 	if start_box and start_box.links.has(self):

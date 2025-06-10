@@ -56,7 +56,7 @@ func mac_input(event: InputEvent) -> void:
 		set_process(true)
 
 		
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var direction : = Vector2.ZERO
 	direction.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	direction.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")

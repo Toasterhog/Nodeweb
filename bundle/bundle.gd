@@ -147,14 +147,6 @@ func tool_changed(tool):
 		
 		
 		
-		
-		
-		
-		
-		
-		
-		
-
 
 func _on_panel_container_minimum_size_changed() -> void:
 	panel.custom_minimum_size.x = $PanelContainer.size.x + 60

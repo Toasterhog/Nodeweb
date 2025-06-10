@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dvarak1c2jild"]
+[gd_scene load_steps=25 format=3 uid="uid://dvarak1c2jild"]
 
 [ext_resource type="Texture2D" uid="uid://bwnp541db5h2r" path="res://zmiscellaneous/canvasbackround.png" id="2_lgaoh"]
 [ext_resource type="Script" uid="uid://be4x5mqb1hwnc" path="res://controls/save_button.gd" id="3_dslak"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" uid="uid://bsuiepppwr12n" path="res://state/tool_eraze.gd" id="9_lgaoh"]
 [ext_resource type="Script" uid="uid://bfsi0bgsuxrco" path="res://saveAndLoad/save_dialog.gd" id="11_iv76u"]
 [ext_resource type="Script" uid="uid://b0xc8u2lyy4dv" path="res://saveAndLoad/load_dialog.gd" id="12_x4i5i"]
+[ext_resource type="Script" uid="uid://q1kthp1kk3dw" path="res://state/tool_add_arrow.gd" id="13_gxla6"]
 [ext_resource type="Script" uid="uid://sm8xxnbtvc50" path="res://state/tool_add_bundle.gd" id="15_dslak"]
 [ext_resource type="Script" uid="uid://dbxxaawg3f7lh" path="res://state/tool_color.gd" id="16_nhe3j"]
 [ext_resource type="Script" uid="uid://bt1uvpjoevast" path="res://settings/SettingsAndDataManager.gd" id="20_tcmv2"]
@@ -55,6 +56,8 @@ region_rect = Rect2(-8, -8, 2048, 2048)
 
 [node name="linkHolder" type="Node2D" parent="papper"]
 
+[node name="arrowholder" type="Node2D" parent="papper"]
+
 [node name="boxHolder" type="Node2D" parent="papper"]
 
 [node name="Camera2D" type="Camera2D" parent="papper"]
@@ -85,6 +88,10 @@ text = "box"
 layout_mode = 2
 size_flags_horizontal = 3
 text = "link"
+
+[node name="arrow" type="Button" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "arrow"
 
 [node name="bundle" type="Button" parent="CanvasLayer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -194,6 +201,10 @@ metadata/_custom_type_script = "uid://b81hvllv8aegy"
 script = ExtResource("8_vonwv")
 metadata/_custom_type_script = "uid://crlryxb80odig"
 
+[node name="ToolAddArrow" type="Node" parent="state_machine_tools"]
+script = ExtResource("13_gxla6")
+metadata/_custom_type_script = "uid://q1kthp1kk3dw"
+
 [node name="tool_edit" type="Node" parent="state_machine_tools"]
 script = ExtResource("8_lgaoh")
 metadata/_custom_type_script = "uid://c1uha3t6cvqka"
@@ -243,6 +254,7 @@ script = ExtResource("20_tcmv2")
 
 [connection signal="button_down" from="CanvasLayer/VBoxContainer/HBoxContainer/box" to="state_machine_tools" method="_on_box_button_down"]
 [connection signal="button_down" from="CanvasLayer/VBoxContainer/HBoxContainer/link" to="state_machine_tools" method="_on_link_button_down"]
+[connection signal="button_down" from="CanvasLayer/VBoxContainer/HBoxContainer/arrow" to="state_machine_tools" method="_on_arrow_button_down"]
 [connection signal="button_down" from="CanvasLayer/VBoxContainer/HBoxContainer/bundle" to="state_machine_tools" method="_on_bundle_button_down"]
 [connection signal="button_down" from="CanvasLayer/VBoxContainer/HBoxContainer/erasor" to="state_machine_tools" method="_on_erasor_button_down"]
 [connection signal="button_down" from="CanvasLayer/VBoxContainer/HBoxContainer/edit" to="state_machine_tools" method="_on_edit_button_down"]
