@@ -10,7 +10,7 @@
 [ext_resource type="Script" uid="uid://b28kpbtff8ec4" path="res://state/state_machine_tools.gd" id="6_iv76u"]
 [ext_resource type="PackedScene" uid="uid://d0w244dm2f7g8" path="res://controls/pp_save_name.tscn" id="6_rxabt"]
 [ext_resource type="Script" uid="uid://b81hvllv8aegy" path="res://state/tool_add_box.gd" id="7_ah0n3"]
-[ext_resource type="Theme" uid="uid://bpwh4yi1152b1" path="res://controls/the_theme.tres" id="7_yvaoj"]
+[ext_resource type="Theme" uid="uid://bpwh4yi1152b1" path="res://style/the_theme.tres" id="7_yvaoj"]
 [ext_resource type="Script" uid="uid://fe15v5cgcy1x" path="res://scripts/id_manager.gd" id="8_fc7so"]
 [ext_resource type="Script" uid="uid://c1uha3t6cvqka" path="res://state/tool_edit.gd" id="8_lgaoh"]
 [ext_resource type="Script" uid="uid://crlryxb80odig" path="res://state/tool_add_link.gd" id="8_vonwv"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://d0w244dm2f7g8"]
 
-[ext_resource type="Theme" uid="uid://bpwh4yi1152b1" path="res://controls/the_theme.tres" id="1_gurpv"]
+[ext_resource type="Theme" uid="uid://bpwh4yi1152b1" path="res://style/the_theme.tres" id="1_gurpv"]
 
 [node name="pp_SaveName" type="Window"]
 transparent_bg = true
