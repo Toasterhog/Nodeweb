@@ -39,7 +39,8 @@ func load_swatches() -> void:
 		var res : ConfigRes = ResourceLoader.load(path)
 		var swatches = res.swatches
 		for swatch in swatches:
-			cp.add_preset(swatch)
+			cp.add_preset(swatch) #wtfffffffffff
+			print(cp.get_presets())
 		#cp.set_pick_color(res.def_color)
 		color_picker_button.color = res.def_color
 		$"../state_machine_tools"._on_color_picker_button_popup_closed()

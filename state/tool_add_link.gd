@@ -26,13 +26,19 @@ func input(event: InputEvent) -> void:
 			is_dragging = true
 			#start_box.set_selected(true)  # Highlight the start box
 			create_preview_line()
-
-	elif event.is_action_released("LMB"): #NOTE end box will be last hovered box
+	
+	#path to instantiate link bwtween two existing boxes
+	elif event.is_action_released("LMB"): 
 		if is_dragging and grabbing_box and grabbing_box != start_box:
 			if check_if_link_pair_doesnt_exists(start_box, grabbing_box) == true:
 				instantiate_link(start_box, grabbing_box)
-				
-
+		
+		#path to add box and link to it
+		elif is_dragging and not grabbing_box:
+			$"../tool_add_box".instantiate_box()
+			instantiate_link(start_box, $"../../papper/boxHolder".get_child(-1))
+			
+			
 		reset_tool()
 
 	elif is_dragging and event is InputEventMouseMotion:

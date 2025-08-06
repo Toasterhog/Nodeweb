@@ -11,9 +11,11 @@ bundle z-sorting - paused
 ## Feature
 tags  
 - sort by and hide entities with tags  
-- copy paste boxes or selected regions
+- copy paste boxes or selected regions  
 directional links  
-draging link to nowhere places and connects new box
+
+draging link to nowhere places and connects new box  
+things inside bounds of bundle should be parented to bundle and follow its position (work with nested bundles)  
 
 ## Finished
 save and load bundles  
