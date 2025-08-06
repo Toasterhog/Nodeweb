@@ -9,7 +9,6 @@ radius = 20.0
 height = 40.0
 
 [node name="line_directional" type="Line2D"]
-default_color = Color(0.807843, 0.686275, 0.129412, 1)
 texture = ExtResource("1_inxjh")
 texture_mode = 1
 begin_cap_mode = 2

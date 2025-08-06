@@ -13,6 +13,7 @@ tags
 - sort by and hide entities with tags  
 - copy paste boxes or selected regions
 directional links  
+draging link to nowhere places and connects new box
 
 ## Finished
 save and load bundles  
