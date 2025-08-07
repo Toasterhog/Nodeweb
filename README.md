@@ -11,11 +11,14 @@ bundle z-sorting - paused
 ## Feature
 tags  
 - sort by and hide entities with tags  
-- copy paste boxes or selected regions  
-directional links  
+- use groups for tag system?  
 
-draging link to nowhere places and connects new box  
-things inside bounds of bundle should be parented to bundle and follow its position (work with nested bundles)  
+selection system  
+- select via shift+LMB (paint qol) or rectangle select tool  
+- boxes and bundles have set_selected() and set_unselected() methods that:  
+  - visualizes they are selected  
+  - makes them volunerable to actions like  COPY, move, delete, (color), (tag stuff)  
+
 
 ## Finished
 save and load bundles  
@@ -36,3 +39,5 @@ visual indicator of delete tool hover
 decreased min zoom 
 zoom to/away from mouse  
 bundle/panelcontainer resise to fit text, bundle resise to fit panelcontainer 
+directional links  
+draging link to nowhere places and connects new box  
