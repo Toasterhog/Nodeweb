@@ -114,7 +114,11 @@ func _on_mouse_entered() -> void:
 
 func _on_mouse_exited() -> void:
 	mouse_inside = false
-	if state_machine.current_state.name == "tool_delete":
+	if tool_add_link and state_machine.current_state.name == "ToolAddLink":
+		tool_add_link.mouse_over_box(null)
+	elif tool_add_arrow and state_machine.current_state.name == "ToolAddArrow":
+		tool_add_arrow.mouse_over_box(null)
+	elif state_machine.current_state.name == "tool_delete":
 		set_color(color_default)
 
 

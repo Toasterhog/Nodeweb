@@ -52,15 +52,16 @@ func _process(_delta: float) -> void:
 		set_process(false)
 
 func _on_mouse_entered() -> void:
-	print("hej")
 	mouse_inside = true
-	mouse_default_cursor_shape = Control.CURSOR_MOVE
+	if state_machine.current_state.name == "ToolAddBundle":
+		panel.mouse_default_cursor_shape = Control.CURSOR_MOVE
 	if state_machine.current_state.name == "tool_delete":
 		color_normal = panel.modulate
 		panel.modulate = color_delete_indicator
 
 func _on_mouse_exited() -> void:
 	mouse_inside = false
+	panel.mouse_default_cursor_shape = Control.CURSOR_ARROW
 	if state_machine.current_state.name == "tool_delete":
 		panel.modulate = color_normal
 
@@ -86,11 +87,16 @@ func _gui_input(event: InputEvent) -> void:
 		panel.modulate = state_machine.get_node("ToolAddBundle").default_color
 	
 	#ALERT Z-sorting paused
-	#if  event is InputEventAction and event.is_action_just_pressed("push_back", true):
-		#print("bacon")
-		#get_parent().move_child(self, self.get_index()-1 )
-	#if Input.is_key_pressed(KEY_P):
-		#print("mjöl")
+	if event.is_action_pressed(&"push_back", true):
+		print("event.is_action_pressed(&push_back)")
+		get_parent().move_child(self, self.get_index()-1 )
+	if not has_focus():
+		grab_focus()
+		modulate = Color(1,2,3)
+
+func _on_focus_exited() -> void:
+	modulate = Color.WHITE
+
 
 func delete_self():
 	const endsiz := Vector2(0.8, 0)
