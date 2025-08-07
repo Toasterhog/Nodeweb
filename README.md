@@ -31,13 +31,14 @@ screen size adjust
 update id_manager.next_id after loading document  
 save_latest path should update when loading file  
 (box - inverse color brightness)  
-resizable box title textedit 
+resizable box title textedit  
 setting for mac mode  
 - zoom pan with arrowkeys (+ cmd (toggle))  
 - open/close boxes with cmd + lmb  
+
 visual indicator of delete tool hover  
-decreased min zoom 
+decreased min zoom  
 zoom to/away from mouse  
-bundle/panelcontainer resise to fit text, bundle resise to fit panelcontainer 
+bundle/panelcontainer resise to fit text, bundle resise to fit panelcontainer  
 directional links  
 draging link to nowhere places and connects new box  
