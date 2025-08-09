@@ -5,6 +5,7 @@ var drag_start : Vector2
 var select_box : Rect2
 
 var selected_items : Array = []
+var ongoing_selected_items : Array = []
 
 func _input(event: InputEvent) -> void:
 	if not Input.is_key_pressed(KEY_SHIFT):
@@ -20,6 +21,8 @@ func _input(event: InputEvent) -> void:
 				update_selected_items_reverse()
 			else:
 				update_selected_items()
+				selected_items.append_array(ongoing_selected_items)
+				ongoing_selected_items.clear()
 			queue_redraw()
 	elif selecting and event is InputEventMouseMotion:
 		var x_min = min(drag_start.x, event.position.x)
@@ -27,7 +30,7 @@ func _input(event: InputEvent) -> void:
 		select_box = Rect2(x_min, y_min,
 			max(drag_start.x, event.position.x) - x_min,
 			max(drag_start.y, event.position.y) - y_min)
-		#update_selected_items()
+		update_selected_items()
 		queue_redraw()
 
 
@@ -39,14 +42,14 @@ func _draw() -> void:
 func update_selected_items():
 	var world_select_box = screen_to_world(select_box)
 	for item in get_tree().get_nodes_in_group('selectable_items'):
-		var is_in_array = selected_items.has(item)
+		var is_in_ongoing_array = ongoing_selected_items.has(item)
 		if item.is_in_selectionbox(world_select_box):
-			if not is_in_array:
+			if not is_in_ongoing_array and not selected_items.has(item):
 				item.select()
-				add_to_selected(item)
-		elif is_in_array:
+				ongoing_selected_items.append(item)
+		elif is_in_ongoing_array:
 			item.deselect()
-			remove_from_selected(item)
+			ongoing_selected_items.erase(item)
 
 func update_selected_items_reverse():
 	var world_select_point = screen_to_world(select_box).position
@@ -55,6 +58,9 @@ func update_selected_items_reverse():
 			if not selected_items.has(item):
 				item.select()
 				add_to_selected(item)
+			else:
+				item.deselect()
+				remove_from_selected(item)
 			return
 	clear_selection()
 
