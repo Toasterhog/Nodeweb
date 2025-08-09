@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://bbfr0s07ij6tq"]
+[gd_scene load_steps=4 format=3 uid="uid://bbfr0s07ij6tq"]
 
 [ext_resource type="Script" uid="uid://bn4ggk0hwr4ve" path="res://papperthings/link/link.gd" id="1_foi4b"]
+[ext_resource type="Script" uid="uid://7p0vw1aqnjef" path="res://scripts/selectable_link.gd" id="2_1jiww"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vwmme"]
 resource_local_to_scene = true
@@ -17,3 +18,11 @@ script = ExtResource("1_foi4b")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CapsuleShape2D_vwmme")
+
+[node name="SelectableLink" type="Control" parent="." node_paths=PackedStringArray("outline", "hitbox")]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("2_1jiww")
+outline = NodePath("..")
+hitbox = NodePath("../Area2D")
+metadata/_custom_type_script = "uid://7p0vw1aqnjef"
