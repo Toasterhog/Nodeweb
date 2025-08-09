@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://wfnqhd3r5fxx"]
+[gd_scene load_steps=15 format=3 uid="uid://wfnqhd3r5fxx"]
 
 [ext_resource type="StyleBox" uid="uid://tunkcckfrswo" path="res://papperthings/box/box5_the_choosen_one.tres" id="1_hwf1r"]
 [ext_resource type="Script" uid="uid://7gx01op71qhq" path="res://papperthings/box/box.gd" id="1_p41sv"]
 [ext_resource type="Texture2D" uid="uid://b1fvpqk3s7sgg" path="res://papperthings/box/box9_300.png" id="3_hwf1r"]
+[ext_resource type="Script" uid="uid://ciwugp5d4isu2" path="res://scripts/selectable_item.gd" id="4_u8cex"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u8cex"]
 content_margin_left = 4.0
@@ -30,6 +31,18 @@ content_margin_left = 4.0
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oebl6"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nfx6q"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u8cex"]
+bg_color = Color(0.337255, 0.654902, 0.690196, 0)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.720454, 0.276305, 0.724026, 1)
+expand_margin_left = 30.0
+expand_margin_top = 30.0
+expand_margin_right = 30.0
+expand_margin_bottom = 30.0
 
 [node name="base" type="PanelContainer"]
 editor_description = "min size x 170 = 150 + 2*12 = min size for LE + 2 * magin
@@ -114,6 +127,20 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_2q5ei")
 theme_override_styles/hover = SubResource("StyleBoxEmpty_xinuc")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_oebl6")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_nfx6q")
+
+[node name="SelectableItem" type="Control" parent="." node_paths=PackedStringArray("outline")]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+size_flags_stretch_ratio = 4.23
+script = ExtResource("4_u8cex")
+outline = NodePath("../selection_outline")
+metadata/_custom_type_script = "uid://ciwugp5d4isu2"
+
+[node name="selection_outline" type="Panel" parent="."]
+z_index = 1
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_u8cex")
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
