@@ -128,18 +128,21 @@ theme_override_styles/hover = SubResource("StyleBoxEmpty_xinuc")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_oebl6")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_nfx6q")
 
-[node name="SelectableItem" type="Control" parent="." node_paths=PackedStringArray("outline")]
+[node name="SelectableItem" type="Control" parent="." node_paths=PackedStringArray("outline", "hitbox")]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 size_flags_stretch_ratio = 4.23
+mouse_filter = 2
 script = ExtResource("4_u8cex")
 outline = NodePath("../selection_outline")
+hitbox = NodePath("..")
 metadata/_custom_type_script = "uid://ciwugp5d4isu2"
 
 [node name="selection_outline" type="Panel" parent="."]
 z_index = 1
 layout_mode = 2
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_u8cex")
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]

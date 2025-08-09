@@ -194,6 +194,7 @@ ok_button_text = "Delete all"
 [node name="SelectionSystem" type="Control" parent="CanvasLayer"]
 layout_mode = 3
 anchors_preset = 0
+mouse_filter = 1
 script = ExtResource("22_3b82i")
 
 [node name="state_machine_tools" type="Node" parent="."]
