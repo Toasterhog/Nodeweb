@@ -1,25 +1,22 @@
 extends Control
 class_name SelectableItem
 
-@export var outline : CanvasItem
-@export var hitbox : CanvasItem
+@export var outline : Node
+@export var hitbox : Control
 
 func _ready() -> void:
 	outline.hide()
 	add_to_group('selectable_items')
-	
 
 
 func is_in_selectionbox(box : Rect2):
 	return box.has_point(global_position)
 
 func area_has_selectionpoint(point : Vector2):
-	return Rect2(hitbox.position, hitbox.size).has_point(point)
-
+	return Rect2(hitbox.global_position, hitbox.size).has_point(point)
 
 func select():
 	outline.show()
-
 
 func deselect():
 	outline.hide()

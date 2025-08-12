@@ -87,3 +87,8 @@ func clear_selection():
 func is_equal_almost(a : Vector2, b : Vector2):
 	var differance = abs(a-b)
 	return differance.x + differance.y < 40
+
+#func distribute_gui_input(e):
+#conect gui_input signal from selected.hitbox (or selected.smt_else) to some centralized thing here
+#connect centralized thing signal to selected.scrip_having_node.gui_input
+#use selection for bundle push back

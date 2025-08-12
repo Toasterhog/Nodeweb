@@ -17,7 +17,7 @@ var half_drag_button_width = 17.5
 @onready var panel: Panel = $Panel
 @onready var drag_button_1: Button = $Panel/drag_button
 @onready var drag_button_2: Button = $Panel/drag_button2
-@onready var text_edit: TextEdit = $PanelContainer/TextEdit
+@onready var text_edit: TextEdit = $Panel/PanelContainer/TextEdit
 var color_normal
 var color_delete_indicator := Color(0.8,0,0,1)
 
@@ -56,14 +56,13 @@ func _on_mouse_entered() -> void:
 	if state_machine.current_state.name == "ToolAddBundle":
 		panel.mouse_default_cursor_shape = Control.CURSOR_MOVE
 	if state_machine.current_state.name == "tool_delete":
-		color_normal = panel.modulate
-		panel.modulate = color_delete_indicator
+		set_temporary_color(color_delete_indicator)
 
 func _on_mouse_exited() -> void:
 	mouse_inside = false
 	panel.mouse_default_cursor_shape = Control.CURSOR_ARROW
 	if state_machine.current_state.name == "tool_delete":
-		panel.modulate = color_normal
+		set_temporary_color(color_normal)
 
 func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
@@ -84,7 +83,7 @@ func _gui_input(event: InputEvent) -> void:
 				get_viewport().set_input_as_handled()
 	
 	if state_machine.current_state.name == "ToolColor" and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
-		panel.modulate = state_machine.get_node("ToolAddBundle").default_color
+		set_color(state_machine.get_node("ToolAddBundle").default_color)
 	
 	#ALERT Z-sorting paused
 	if event.is_action_pressed(&"push_back", true):
@@ -155,6 +154,16 @@ func tool_changed(tool):
 		
 
 func _on_panel_container_minimum_size_changed() -> void:
-	panel.custom_minimum_size.x = $PanelContainer.size.x + 60
-	panel.custom_minimum_size.y = $PanelContainer.size.y + 60
+	panel.custom_minimum_size.x = $Panel/PanelContainer.size.x + 60
+	panel.custom_minimum_size.y = $Panel/PanelContainer.size.y + 60
+	
+func set_color(new_color):
+	color_normal = new_color
+	set_temporary_color(new_color)
+
+	
+func set_temporary_color(new_color):
+	panel.self_modulate = new_color
+	drag_button_1.modulate = new_color
+	drag_button_2.modulate = new_color
 	

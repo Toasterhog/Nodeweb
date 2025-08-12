@@ -25,7 +25,7 @@ var middlepos : Vector2
 var cust_width_fold : float = 0
 var cust_width_expnd : float = 0
 var color_default : Color
-var color_delete_indicate := Color(0.9, 0.1, 0.1, 1)
+const color_delete_indicate := Color(0.9, 0.1, 0.1, 1)
 
 
  
