@@ -21,7 +21,9 @@ func _input(event: InputEvent) -> void:
 				update_selected_items_reverse()
 			else:
 				update_selected_items()
-				selected_items.append_array(ongoing_selected_items)
+				for i in ongoing_selected_items.size():
+					add_to_selected(ongoing_selected_items.pop_back())
+				#selected_items.append_array(ongoing_selected_items)
 				ongoing_selected_items.clear()
 			queue_redraw()
 	elif selecting and event is InputEventMouseMotion:
@@ -75,9 +77,15 @@ func screen_to_world(box : Rect2) -> Rect2:
 
 func add_to_selected(item):
 	selected_items.append(item)
-		
+	item.hitbox.gui_input.connect(distribute_gui_input)
+	send_gui.connect(item.hitbox._gui_input)
+	item.hitbox.mouse_inside = true
+	
 func remove_from_selected(item):
 	selected_items.erase(item)
+	item.hitbox.gui_input.disconnect(distribute_gui_input)
+	send_gui.disconnect(item.hitbox._gui_input)
+	
 
 func clear_selection():
 	for item in selected_items:
@@ -88,7 +96,14 @@ func is_equal_almost(a : Vector2, b : Vector2):
 	var differance = abs(a-b)
 	return differance.x + differance.y < 40
 
-#func distribute_gui_input(e):
+
+signal send_gui(e: InputEvent)
+
+func distribute_gui_input(e):
+	#send_gui.emit(e)
+	for s in selected_items:
+		s.hitbox._gui_input(e)
+	
 #conect gui_input signal from selected.hitbox (or selected.smt_else) to some centralized thing here
 #connect centralized thing signal to selected.scrip_having_node.gui_input
 #use selection for bundle push back
