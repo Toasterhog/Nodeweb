@@ -16,11 +16,16 @@ func area_has_selectionpoint(point : Vector2):
 	return Rect2(hitbox.global_position, hitbox.size).has_point(point)
 
 func select():
-	outline.show()
+	feedback()
 
 func deselect():
-	outline.hide()
+	defeedback()
 
+func feedback():
+	outline.show()
+
+func defeedback():
+	outline.hide()
 
 func _exit_tree() -> void:
 	$/root/Main/CanvasLayer/SelectionSystem.remove_from_selected(self)

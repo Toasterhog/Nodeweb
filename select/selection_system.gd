@@ -78,18 +78,22 @@ func screen_to_world(box : Rect2) -> Rect2:
 func add_to_selected(item):
 	selected_items.append(item)
 	item.hitbox.gui_input.connect(distribute_gui_input)
-	send_gui.connect(item.hitbox._gui_input)
+	item.hitbox.mouse_exited.connect(set_mi_true.bind(item.hitbox))
 	item.hitbox.mouse_inside = true
 	
 func remove_from_selected(item):
 	selected_items.erase(item)
 	item.hitbox.gui_input.disconnect(distribute_gui_input)
-	send_gui.disconnect(item.hitbox._gui_input)
-	
+	item.hitbox.mouse_exited.disconnect(set_mi_true)
+	item.hitbox.mouse_inside = false
 
 func clear_selection():
 	for item in selected_items:
 		item.deselect()
+		#mirror from remove_rom_selected
+		item.hitbox.gui_input.disconnect(distribute_gui_input)
+		item.hitbox.mouse_exited.disconnect(set_mi_true)
+		item.hitbox.mouse_inside = false
 	selected_items.clear()
 
 func is_equal_almost(a : Vector2, b : Vector2):
@@ -97,13 +101,15 @@ func is_equal_almost(a : Vector2, b : Vector2):
 	return differance.x + differance.y < 40
 
 
-signal send_gui(e: InputEvent)
+
 
 func distribute_gui_input(e):
 	#send_gui.emit(e)
 	for s in selected_items:
 		s.hitbox._gui_input(e)
-	
+
+func set_mi_true(node):
+	node.mouse_inside = true
 #conect gui_input signal from selected.hitbox (or selected.smt_else) to some centralized thing here
 #connect centralized thing signal to selected.scrip_having_node.gui_input
 #use selection for bundle push back
