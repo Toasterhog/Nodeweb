@@ -2,8 +2,8 @@ extends FileDialog
 
 var path: String = ""
 var savefolder : String = ""
-const DOCUMENT_PRESET_RESOURCE = preload("res://saveAndLoad/document_preset_resource.tres")
 @onready var link_holder: Node2D = $"../../papper/linkHolder"
+@onready var arrowholder: Node2D = $"../../papper/arrowholder"
 @onready var box_holder: Node2D = $"../../papper/boxHolder"
 @onready var bundle_holder: Node2D = $"../../papper/bundleHolder"
 @onready var folder_dialog: FileDialog = $"../FolderDialog"
@@ -41,47 +41,24 @@ func tidy_up_pathname():
 func save_doc_to_path():
 	print("saving to: ", path)
 	button_animate.emit()
-	var document = DOCUMENT_PRESET_RESOURCE.duplicate()
+	var document = DocumentClass.new()
 	
-	var boxhcc := box_holder.get_child_count()
-	document.id.resize(boxhcc)
-	document.pos.resize(boxhcc)
-	document.color.resize(boxhcc)
-	document.LineText.resize(boxhcc)
-	document.BodyText.resize(boxhcc)
-	document.expanded.resize(boxhcc)
-	
-	var linkhcc := link_holder.get_child_count()
-	document.link_sb.resize(linkhcc)
-	document.link_eb.resize(linkhcc)
-	
-	var bundlehcc:= bundle_holder.get_child_count()
-	document.bundle_id.resize(bundlehcc)
-	document.bundle_pos.resize(bundlehcc)
-	document.bundle_size.resize(bundlehcc)
-	document.bundle_color.resize(bundlehcc)
-	document.bundle_label.resize(bundlehcc)
+	IdManager.reset_ids() #why not idk
+	#no cus just empty slots probably
+	#document.box_res_array.resize(box_holder.get_child_count()) #optional but prop saves performance
 	
 	for b in box_holder.get_children():
-		var i = b.get_index()
-		document.id[i] = b.id
-		document.pos[i] = b.position
-		document.color[i] = b.self_modulate
-		document.LineText[i] = b.get_node("MarginContainer/VBoxContainer/LineEdit").text
-		document.BodyText[i] = b.get_node("MarginContainer/VBoxContainer/TextEdit").text
-		document.expanded[i] = b.get_node("MarginContainer/VBoxContainer/TextEdit").visible #error here
+		document.box_res_array.append(BoxProperties.item_to_resource(b))
+	
+	for u in bundle_holder.get_children():
+		document.bundle_res_array.append(BundleProperties.item_to_resource(u))
 	
 	for l in link_holder.get_children():
-		var i = l.get_index()
-		document.link_sb[i] = l.start_box.id
-		document.link_eb[i] = l.end_box.id
+		document.link_res_array.append(LinkProperties.item_to_resource(l))
 		
-	for b in bundle_holder.get_children():
-		var i = b.get_index()
-		document.bundle_id[i] = i
-		document.bundle_pos[i] = b.position
-		document.bundle_size[i] = b.get_node("Panel").size
-		document.bundle_color[i] = b.get_node("Panel").modulate
-		document.bundle_label[i] = b.get_node("PanelContainer/TextEdit").text
+	for a in arrowholder.get_children():
+		var res = LinkProperties.item_to_resource(a)
+		res.link_type = 1
+		document.link_res_array.append(res)
 	
 	ResourceSaver.save(document, path)
