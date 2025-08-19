@@ -1,5 +1,5 @@
 # TODO:
-
+				bundle node tree and stuff compatible with save load and select
 ## mac  
 tuch pad support  
 
