@@ -16,3 +16,7 @@ class_name DocumentClass
 @export var bundle_size : Array[Vector2] = []
 @export var bundle_label : Array[String] = []
 @export var bundle_color : Array[Color] = []
+
+@export var box_res_array : Array[Vector2] = []
+@export var bundle_res_array : Array[String] = []
+@export var link_res_array : Array[Color] = []
