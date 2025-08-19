@@ -1,9 +1,13 @@
 # TODO:
 
 ## mac  
-tuch pad support
+tuch pad support  
 
 ## Appearance  
+top left buttons style-theme  
+backround  
+- other backround options, flat and depth/mountains  
+- repeating backround and further min zoom  
 
 ## QoL
 bundle z-sorting - paused  
@@ -42,3 +46,4 @@ zoom to/away from mouse
 bundle/panelcontainer resise to fit text, bundle resise to fit panelcontainer  
 directional links  
 draging link to nowhere places and connects new box  
+refactor save/load system to use resources for induvidual items instead of arrays
