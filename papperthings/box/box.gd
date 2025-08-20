@@ -37,7 +37,6 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
-		
 	if TE.has_focus() or LE.has_focus():
 		if (mouse_inside == false and event is InputEventMouseButton and event.pressed\
 		and (event.button_index == MOUSE_BUTTON_LEFT or event.button_index == MOUSE_BUTTON_RIGHT)) \
@@ -46,7 +45,6 @@ func _input(event: InputEvent) -> void:
 				LE.release_focus()
 			else:
 				TE.release_focus()
-	
 	
 	if event is InputEventMouseButton:
 		if state_machine.current_state.name == "tool_add_box"  and event.button_index == MOUSE_BUTTON_LEFT\
@@ -67,7 +65,6 @@ func _input(event: InputEvent) -> void:
 
 func _process(_delta: float) -> void:
 	if is_dragging:
-		pass
 		global_position = get_global_mouse_position() - drag_offset
 		middlepos = global_position + size/2
 		moved.emit()

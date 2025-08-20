@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dvarak1c2jild"]
+[gd_scene load_steps=27 format=3 uid="uid://dvarak1c2jild"]
 
 [ext_resource type="Texture2D" uid="uid://bwnp541db5h2r" path="res://zmiscellaneous/canvasbackround.png" id="2_lgaoh"]
 [ext_resource type="Script" uid="uid://be4x5mqb1hwnc" path="res://controls/save_button.gd" id="3_dslak"]
@@ -16,6 +16,7 @@
 [ext_resource type="Script" uid="uid://crlryxb80odig" path="res://state/tool_add_link.gd" id="8_vonwv"]
 [ext_resource type="Script" uid="uid://bsuiepppwr12n" path="res://state/tool_eraze.gd" id="9_lgaoh"]
 [ext_resource type="Script" uid="uid://bfsi0bgsuxrco" path="res://saveAndLoad/save_dialog.gd" id="11_iv76u"]
+[ext_resource type="Script" uid="uid://cacndv4xf7arn" path="res://select/selection_actions.gd" id="11_s8yej"]
 [ext_resource type="Script" uid="uid://b0xc8u2lyy4dv" path="res://saveAndLoad/load_dialog.gd" id="12_x4i5i"]
 [ext_resource type="Script" uid="uid://q1kthp1kk3dw" path="res://state/tool_add_arrow.gd" id="13_gxla6"]
 [ext_resource type="Script" uid="uid://sm8xxnbtvc50" path="res://state/tool_add_bundle.gd" id="15_dslak"]
@@ -194,8 +195,15 @@ ok_button_text = "Delete all"
 [node name="SelectionSystem" type="Control" parent="CanvasLayer"]
 layout_mode = 3
 anchors_preset = 0
-mouse_filter = 1
+mouse_filter = 2
 script = ExtResource("22_3b82i")
+
+[node name="SelectionActions" type="Control" parent="CanvasLayer/SelectionSystem"]
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 2
+script = ExtResource("11_s8yej")
+metadata/_custom_type_script = "uid://cacndv4xf7arn"
 
 [node name="state_machine_tools" type="Node" parent="."]
 script = ExtResource("6_iv76u")

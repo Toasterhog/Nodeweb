@@ -3,6 +3,7 @@ class_name SelectableItem
 
 @export var outline : Node
 @export var hitbox : Control
+@export var scriptowner : Control ##rn also root
 
 func _ready() -> void:
 	outline.hide()
@@ -10,7 +11,7 @@ func _ready() -> void:
 
 
 func is_in_selectionbox(box : Rect2):
-	return box.has_point(global_position)
+	return box.has_point(global_position) #self node is anchored to middle
 
 func area_has_selectionpoint(point : Vector2):
 	return Rect2(hitbox.global_position, hitbox.size).has_point(point)

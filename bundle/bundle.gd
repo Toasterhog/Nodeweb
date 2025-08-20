@@ -77,24 +77,15 @@ func _gui_input(event: InputEvent) -> void:
 				is_dragging = true
 				set_process(true)
 				drag_offset = get_global_mouse_position() - global_position
-				get_viewport().set_input_as_handled()
 			elif not event.pressed:
 				is_dragging = false
-				get_viewport().set_input_as_handled()
+				
+			#if event.button_index == MOUSE_BUTTON_LEFT: #if tooladdbundle: prevent adding bundle when try move one
+				#get_viewport().set_input_as_handled()
 	
 	if state_machine.current_state.name == "ToolColor" and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
 		set_color(state_machine.get_node("ToolAddBundle").default_color)
 	
-	#ALERT Z-sorting paused
-	if event.is_action_pressed(&"push_back", true):
-		print("event.is_action_pressed(&push_back)")
-		get_parent().move_child(self, self.get_index()-1 )
-	if not has_focus():
-		grab_focus()
-		modulate = Color(1,2,3)
-
-func _on_focus_exited() -> void:
-	modulate = Color.WHITE
 
 
 func delete_self():

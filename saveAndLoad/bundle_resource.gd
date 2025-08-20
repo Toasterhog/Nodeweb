@@ -14,7 +14,7 @@ static func item_to_resource(item: BundleClass) -> Resource:
 	res.pos = item.position
 	res.size = item.get_node("Panel").size
 	res.color = item.get_node("Panel").modulate
-	res.label = item.get_node("PanelContainer/TextEdit").text
+	res.label = item.get_node("Panel/PanelContainer/TextEdit").text
 	return res
 
 ##Returns a bundle instance based on propertyresource.  NOTE: id +1000 |  not clamped to camera limits
@@ -24,5 +24,5 @@ static func resource_to_item(res: BundleProperties) -> BundleClass:
 	bundle.position = res.pos
 	bundle.get_node("Panel").modulate = res.color
 	bundle.get_node("Panel").size = res.size
-	bundle.get_node("PanelContainer/TextEdit").text = res.label
+	bundle.get_node("Panel/PanelContainer/TextEdit").text = res.label
 	return bundle

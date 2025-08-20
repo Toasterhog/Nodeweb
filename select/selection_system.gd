@@ -1,4 +1,5 @@
 extends Control
+class_name SelectionSystem
 
 var selecting : bool = false
 var drag_start : Vector2
@@ -8,6 +9,7 @@ var selected_items : Array = []
 var ongoing_selected_items : Array = []
 
 func _input(event: InputEvent) -> void:
+	forward_input_to_selected(event)
 	if not Input.is_key_pressed(KEY_SHIFT):
 		return
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
@@ -77,23 +79,23 @@ func screen_to_world(box : Rect2) -> Rect2:
 
 func add_to_selected(item):
 	selected_items.append(item)
-	item.hitbox.gui_input.connect(distribute_gui_input)
-	item.hitbox.mouse_exited.connect(set_mi_true.bind(item.hitbox))
-	item.hitbox.mouse_inside = true
+	item.scriptowner.gui_input.connect(distribute_gui_input)
+	item.hitbox.mouse_exited.connect(set_mi_true.bind(item.scriptowner), ConnectFlags.CONNECT_DEFERRED)
+	item.scriptowner.mouse_inside = true
 	
 func remove_from_selected(item):
 	selected_items.erase(item)
-	item.hitbox.gui_input.disconnect(distribute_gui_input)
+	item.scriptowner.gui_input.disconnect(distribute_gui_input)
 	item.hitbox.mouse_exited.disconnect(set_mi_true)
-	item.hitbox.mouse_inside = false
+	item.scriptowner.mouse_inside = false
 
 func clear_selection():
 	for item in selected_items:
 		item.deselect()
 		#mirror from remove_rom_selected
-		item.hitbox.gui_input.disconnect(distribute_gui_input)
+		item.scriptowner.gui_input.disconnect(distribute_gui_input)
 		item.hitbox.mouse_exited.disconnect(set_mi_true)
-		item.hitbox.mouse_inside = false
+		item.scriptowner.mouse_inside = false
 	selected_items.clear()
 
 func is_equal_almost(a : Vector2, b : Vector2):
@@ -104,12 +106,26 @@ func is_equal_almost(a : Vector2, b : Vector2):
 
 
 func distribute_gui_input(e):
-	#send_gui.emit(e)
-	for s in selected_items:
-		s.hitbox._gui_input(e)
+	pass
+	##send_gui.emit(e)
+	#for s in selected_items:
+		#s.scriptowner._gui_input(e)
 
 func set_mi_true(node):
 	node.mouse_inside = true
 #conect gui_input signal from selected.hitbox (or selected.smt_else) to some centralized thing here
 #connect centralized thing signal to selected.scrip_having_node.gui_input
 #use selection for bundle push back
+
+func forward_input_to_selected(e):
+	for s in selected_items:
+		s.scriptowner._gui_input(e)
+		
+	if e.is_action_pressed(&"push_back", true):
+		print("event.is_action_pressed(&push_back)")
+		for i in selected_items:
+			if i.scriptowner is BundleClass:
+				i.scriptowner.get_parent().move_child(i.scriptowner, i.scriptowner.get_index()-1 )
+	#if not has_focus():
+		#grab_focus()
+		#modulate = Color(1,2,3)
