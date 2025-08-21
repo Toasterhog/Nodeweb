@@ -88,6 +88,8 @@ theme_override_font_sizes/font_size = 24
 theme_override_styles/normal = SubResource("StyleBoxEmpty_8skqq")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_7y1ch")
 placeholder_text = "Bundle"
+context_menu_enabled = false
+emoji_menu_enabled = false
 scroll_fit_content_height = true
 scroll_fit_content_width = true
 

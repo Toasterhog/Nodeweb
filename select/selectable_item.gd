@@ -18,9 +18,12 @@ func area_has_selectionpoint(point : Vector2):
 
 func select():
 	feedback()
+	#scriptowner.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
 func deselect():
 	defeedback()
+	#scriptowner.mouse_filter = Control.MOUSE_FILTER_STOP if scriptowner is BoxClass else Control.MOUSE_FILTER_PASS
+	
 
 func feedback():
 	outline.show()
