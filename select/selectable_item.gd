@@ -4,6 +4,7 @@ class_name SelectableItem
 @export var outline : Node
 @export var hitbox : Control
 @export var scriptowner : Control ##rn also root
+var drag_offset_mouse : Vector2
 
 func _ready() -> void:
 	outline.hide()

@@ -37,6 +37,10 @@ func _ready() -> void:
 
 
 func _input(event: InputEvent) -> void:
+	if $selection_outline.visible: #for selection stuff to work
+		is_dragging = false
+		return
+	
 	if TE.has_focus() or LE.has_focus():
 		if (mouse_inside == false and event is InputEventMouseButton and event.pressed\
 		and (event.button_index == MOUSE_BUTTON_LEFT or event.button_index == MOUSE_BUTTON_RIGHT)) \
@@ -89,12 +93,11 @@ func _process(_delta: float) -> void:
 			cust_width_expnd = max(150+24, cust_width_expnd, TE.get_minimum_size().x + 24)
 		update_vbc_and_panel_size()
 		
-	
-	
 	elif is_flowing:
 		flow()
 	else:
 		set_process(false)
+
 
 func _on_mouse_entered() -> void:
 	mouse_inside = true
@@ -105,9 +108,6 @@ func _on_mouse_entered() -> void:
 	elif state_machine.current_state.name == "tool_delete":
 		color_default = self_modulate
 		set_color(color_delete_indicate)
-
-
-
 
 func _on_mouse_exited() -> void:
 	mouse_inside = false
@@ -137,6 +137,8 @@ func show_notes():
 		$MarginContainer/VBoxContainer/HSeparator.visible = true
 	update_vbc_and_panel_size()
 
+
+
 func update_vbc_and_panel_size():
 	var w
 	var wi 
@@ -163,8 +165,6 @@ func update_vbc_and_panel_size():
 	middlepos = global_position + size/2
 	moved.emit()
 
-
-	
 
 #@export var curve : Curve
 #func flow2():

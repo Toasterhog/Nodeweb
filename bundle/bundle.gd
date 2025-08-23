@@ -8,7 +8,7 @@ var id = -1
 var is_dragging := false
 var drag_offset := Vector2.ZERO
 var mouse_inside := false
-var middlepos : Vector2
+#var middlepos : Vector2
 
 var is_scaling := false
 var is_scaling2 := false
@@ -37,7 +37,7 @@ func _process(_delta: float) -> void:
 	
 	if is_dragging:
 		global_position = get_global_mouse_position() - drag_offset
-		middlepos = global_position + size/2
+		#middlepos = global_position + size/2
 		
 	elif is_scaling:
 		var s = get_global_mouse_position() - global_position
