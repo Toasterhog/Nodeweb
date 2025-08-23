@@ -3,6 +3,8 @@ class_name SelectionActions
 
 @onready var selection_system: SelectionSystem = $".."
 @onready var state_machine: Node = $"../../../state_machine_tools"
+@onready var selection_copy_paste: Control = $"../SelectionCopyPaste"
+
 var miaos : bool = false ##mouse in any of selected
 var is_draging : bool = false
 
@@ -23,6 +25,7 @@ func _input(event: InputEvent) -> void:
 	show_notes_input(event)
 	color_input(event)
 	delete_input(event)
+	selection_copy_paste.cp_input(event)
 
 
 
