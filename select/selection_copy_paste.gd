@@ -16,20 +16,26 @@ func cp_input(e : InputEvent): #called from selection_actions
 		selection_to_document()
 		
 	elif Input.is_action_just_pressed("ui_paste"):
-		if clipboard:
+		if clipboard and hologram_holder.get_child_count() == 0: #not paste multiple times into hologram witout clearing in betwen
 			document_to_hologram_instances(clipboard)
 	
 	elif Input.is_action_just_pressed("ui_graph_duplicate"):
 		selection_to_document()
 		document_to_hologram_instances(clipboard)
 	
-	if is_pasting:
+	elif is_pasting:
 		update_hologram()
 		if e is InputEventMouseButton and e.button_index == MOUSE_BUTTON_LEFT and e.pressed:
-			hologram_to_normal_instances()
+			document_to_normal_instances()
+			get_viewport().set_input_as_handled()
 		elif e is InputEventMouseButton and e.button_index == MOUSE_BUTTON_RIGHT and e.pressed\
 		or Input.is_action_just_pressed("ui_cancel"):
 			clear_hologram()
+			get_viewport().set_input_as_handled()
+	
+	else:
+		return
+	get_viewport().set_input_as_handled() #set as handled if any of above ran, else quit before and not set as handled
 
 func selection_to_document(): #pos relative to mouse, or + mousepos at pste
 	IdManager.reset_ids() #why not idk
@@ -63,13 +69,13 @@ func document_to_hologram_instances(clipboard : DocumentClass):
 	var doc : DocumentClass = clipboard
 	var c : Camera2D = $"../../../papper/Camera2D"
 	#var num_boxes_from_before : int = $"../../../papper/boxHolder".get_child_count()
-	var hol_instantiated_boxes = []
+	var hol_box_newID_dict = {}
 	#place boxes
 	for res in doc.box_res_array:
 		var box = BoxProperties.resource_to_item(res) #note id +1000
 		box.set_color(hologram_color)
 		hologram_holder.add_child(box)
-		hol_instantiated_boxes.append(box)
+		hol_box_newID_dict[box.id] = box
 		box.update_vbc_and_panel_size()
 		#box.position = box.position.clamp(Vector2(c.limit_left,c.limit_top),Vector2(c.limit_right -300,c.limit_bottom - 300))
 	
@@ -90,20 +96,21 @@ func document_to_hologram_instances(clipboard : DocumentClass):
 			0:
 				var link = LINK.instantiate()
 				link.base_color = res.color
-				link.start_box = hol_instantiated_boxes[res.start_box]
-				link.end_box = hol_instantiated_boxes[res.end_box]
+				link.start_box = hol_box_newID_dict[res.start_box + 1000]
+				link.end_box = hol_box_newID_dict[res.end_box + 1000]
 				hologram_holder.add_child(link)
+				link.update_line()
 			1:
 				var link = ARROW.instantiate() #this looks messy and is weird
 				link.base_color = res.color
-				link.start_box = hol_instantiated_boxes[res.start_box]
-				link.end_box = hol_instantiated_boxes[res.end_box]
+				link.start_box = hol_box_newID_dict[res.start_box + 1000]
+				link.end_box = hol_box_newID_dict[res.end_box + 1000]
 				hologram_holder.add_child(link)
+				link.update_line()
 				
-	
 	IdManager.reset_ids()
 
-func hologram_to_normal_instances():
+func document_to_normal_instances():
 	clear_hologram()
 	if not clipboard:
 		print("no clipboard")
@@ -116,8 +123,10 @@ func hologram_to_normal_instances():
 	
 	var doc : DocumentClass = clipboard
 	var c : Camera2D = $"../../../papper/Camera2D"
-	var num_boxes_from_before : int = box_holder.get_child_count()
+	#var num_boxes_from_before : int = box_holder.get_child_count()
 	var offset =  bundle_holder.get_global_mouse_position() - mouse_pos_when_copy
+	var box_newID_dict = {}
+	
 	#place boxes
 	for res in doc.box_res_array:
 		var box = BoxProperties.resource_to_item(res) #note id +1000
@@ -125,6 +134,7 @@ func hologram_to_normal_instances():
 		box.update_vbc_and_panel_size()
 		box.position += offset
 		box.position = box.position.clamp(Vector2(c.limit_left,c.limit_top),Vector2(c.limit_right -300,c.limit_bottom - 300))
+		box_newID_dict[box.id] = box
 	
 	#place bundles
 	for res in doc.bundle_res_array:
@@ -135,22 +145,22 @@ func hologram_to_normal_instances():
 	
 	#place links and arrows (theres no reason for them to be combined)
 	for res in doc.link_res_array:
-		if res.start_box + num_boxes_from_before >= box_holder.get_child_count() or\
-		res.end_box + num_boxes_from_before >= box_holder.get_child_count():
-			return # no out of bounds children
+		#if res.start_box + num_boxes_from_before >= box_holder.get_child_count() or\
+		#res.end_box + num_boxes_from_before >= box_holder.get_child_count():
+			#return # no out of bounds children
 		
 		match res.link_type:
 			0:
 				var link = LINK.instantiate()
 				link.base_color = res.color
-				link.start_box = box_holder.get_child( res.start_box + num_boxes_from_before)
-				link.end_box = box_holder.get_child( res.end_box + num_boxes_from_before)
+				link.start_box = box_newID_dict[res.start_box + 1000]
+				link.end_box = box_newID_dict[res.end_box + 1000]
 				link_holder.add_child(link)
 			1:
 				var link = ARROW.instantiate() #this looks messy and is weird
 				link.base_color = res.color
-				link.start_box = box_holder.get_child( res.start_box + num_boxes_from_before)
-				link.end_box = box_holder.get_child( res.end_box + num_boxes_from_before)
+				link.start_box = box_newID_dict[res.start_box + 1000]
+				link.end_box = box_newID_dict[res.end_box + 1000]
 				arrowholder.add_child(link)
 				
 	IdManager.reset_ids()
