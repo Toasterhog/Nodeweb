@@ -39,15 +39,11 @@ bundle/panelcontainer resise to fit text, bundle resise to fit panelcontainer
 directional links  
 draging link to nowhere places and connects new box  
 refactor save/load system to use resources for induvidual items instead of arrays  
-selection system  
-- select via shift+LMB or rectangle select tool  
-- boxes and bundles have set_selected() and set_unselected() methods that:  
-  - visualizes they are selected  
-  - makes them volunerable to actions like:  
-	- COPY/paste  
-	- move 
-	- show notes 
-	- delete  
-	- color  
-	- bundle z-sorting  
+selection system   
+  - COPY/paste  
+  - move 
+  - show notes 
+  - delete  
+  - color  
+  - bundle z-sorting  
   
