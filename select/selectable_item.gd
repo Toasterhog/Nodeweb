@@ -1,0 +1,38 @@
+extends Control
+class_name SelectableItem
+
+@export var outline : Node
+@export var hitbox : Control
+@export var scriptowner : Control ##rn also root
+var drag_offset_mouse : Vector2
+
+func _ready() -> void:
+	outline.hide()
+	add_to_group('selectable_items')
+
+
+func is_in_selectionbox(box : Rect2):
+	return box.has_point(global_position) #self node is anchored to middle
+
+func area_has_selectionpoint(point : Vector2):
+	return Rect2(hitbox.global_position, hitbox.size).has_point(point)
+
+func select():
+	feedback()
+	#scriptowner.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+func deselect():
+	defeedback()
+	#scriptowner.mouse_filter = Control.MOUSE_FILTER_STOP if scriptowner is BoxClass else Control.MOUSE_FILTER_PASS
+	
+
+func feedback():
+	outline.show()
+
+func defeedback():
+	outline.hide()
+
+func _exit_tree() -> void:
+	if self in $/root/Main/CanvasLayer/SelectionSystem.selected_items:
+		$/root/Main/CanvasLayer/SelectionSystem.remove_from_selected(self)
+		deselect()
