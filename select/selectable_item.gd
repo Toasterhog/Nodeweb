@@ -33,5 +33,6 @@ func defeedback():
 	outline.hide()
 
 func _exit_tree() -> void:
-	$/root/Main/CanvasLayer/SelectionSystem.remove_from_selected(self)
-	deselect()
+	if self in $/root/Main/CanvasLayer/SelectionSystem.selected_items:
+		$/root/Main/CanvasLayer/SelectionSystem.remove_from_selected(self)
+		deselect()

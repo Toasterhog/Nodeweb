@@ -13,7 +13,7 @@ static func item_to_resource(item: BundleClass) -> Resource:
 	res.id  = item.id
 	res.pos = item.position
 	res.size = item.get_node("Panel").size
-	res.color = item.get_node("Panel").modulate
+	res.color = item.color_normal #item.get_node("Panel").modulate
 	res.label = item.get_node("Panel/PanelContainer/TextEdit").text
 	return res
 
@@ -22,7 +22,8 @@ static func resource_to_item(res: BundleProperties) -> BundleClass:
 	var bundle = preload("uid://bhwvnws1rjko1").instantiate() #bundle scene
 	bundle.id = res.id + 1000
 	bundle.position = res.pos
-	bundle.get_node("Panel").modulate = res.color
+	#bundle.get_node("Panel").modulate = res.color
+	bundle.color_normal = res.color
 	bundle.get_node("Panel").size = res.size
 	bundle.get_node("Panel/PanelContainer/TextEdit").text = res.label
 	return bundle

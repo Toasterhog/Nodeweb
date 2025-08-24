@@ -29,7 +29,8 @@ func _ready() -> void:
 	#add_to_group("bundles")
 	var smtn = get_node("/root/Main/state_machine_tools")
 	smtn.ToolChanged.connect(tool_changed)
-	
+	if color_normal:
+		set_color(color_normal)
 	
 
 

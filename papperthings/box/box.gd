@@ -162,7 +162,7 @@ func update_vbc_and_panel_size():
 	VBC.size.y  = 0
 	TE.size.y  = 0
 
-	middlepos = global_position + size/2
+	middlepos = position + size/2  #was global
 	moved.emit()
 
 

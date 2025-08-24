@@ -19,6 +19,7 @@ func get_selected_bundles() -> Array:
 
 
 func _input(event: InputEvent) -> void:
+	selection_copy_paste.cp_input(event)
 	if not selection_system.selected_items: return #no input if there is no selection
 	if is_draging or miaos:
 		drag_input(event)
@@ -26,7 +27,7 @@ func _input(event: InputEvent) -> void:
 		show_notes_input(event)
 		color_input(event)
 		delete_input(event)
-	selection_copy_paste.cp_input(event)
+	
 
 
 
@@ -34,7 +35,7 @@ func drag_input(e : InputEvent):
 	var papper_mouse_pos = $"../../../papper".get_global_mouse_position() #mouse pos on papper canvas, var bc used in many loops
 	#start/stop drag
 	if e is InputEventMouseButton:
-		if e.button_index == MOUSE_BUTTON_LEFT or e.button_index == MOUSE_BUTTON_RIGHT:
+		if e.button_index == MOUSE_BUTTON_RIGHT: # or e.button_index == MOUSE_BUTTON_RIGHT:
 			if e.pressed: #if mouse press -> draging
 				is_draging = true
 				for i : SelectableItem in selection_system.selected_items: #set offset pos all items
@@ -57,13 +58,14 @@ func drag_input(e : InputEvent):
 func show_notes_input(e : InputEvent):
 	if e is InputEventMouseButton and e.pressed and ((e.button_index == MOUSE_BUTTON_MASK_RIGHT \
 	and e.double_click) or Input.is_key_pressed(KEY_META)):
-		var not_visible :bool = not get_selected_boxes()[2].scriptowner.get_node("MarginContainer/VBoxContainer/HSeparator").visible
+		if not get_selected_boxes(): return
+		var not_visible :bool = not get_selected_boxes()[0].scriptowner.get_node("MarginContainer/VBoxContainer/HSeparator").visible
 		for b : SelectableItem in get_selected_boxes():
 			var base = b.scriptowner
 			base.get_node("MarginContainer/VBoxContainer/TextEdit").visible = not_visible
 			base.get_node("MarginContainer/VBoxContainer/HSeparator").visible = not_visible
 			base.update_vbc_and_panel_size()
-			#get_viewport().set_input_as_handled() #notice no doifferance
+			get_viewport().set_input_as_handled() #notice no doifferance
 
 func color_input(e : InputEvent):
 	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and state_machine.current_state.name == "ToolColor": 
