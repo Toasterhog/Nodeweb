@@ -40,7 +40,7 @@ directional links
 draging link to nowhere places and connects new box  
 refactor save/load system to use resources for induvidual items instead of arrays  
 selection system   
-  - COPY/paste  
+  - copy/paste  
   - move 
   - show notes 
   - delete  
