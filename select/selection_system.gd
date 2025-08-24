@@ -10,7 +10,12 @@ var ongoing_selected_items : Array = []
 @onready var selection_actions: SelectionActions = $SelectionActions
 
 func _input(event: InputEvent) -> void:
-	if not Input.is_key_pressed(KEY_SHIFT):
+	if Input.is_action_just_released("hold_to_select"): #shift #cancel selection
+		select_box = Rect2() 
+		selecting = false
+		update_selected_items()
+		queue_redraw()
+	if not Input.is_action_pressed("hold_to_select"):
 		return
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed:     #press LMB

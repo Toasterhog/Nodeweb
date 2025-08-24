@@ -63,6 +63,8 @@ region_rect = Rect2(-8, -8, 2048, 2048)
 
 [node name="boxHolder" type="Node2D" parent="papper"]
 
+[node name="hologramHolder" type="Node2D" parent="papper"]
+
 [node name="Camera2D" type="Camera2D" parent="papper"]
 limit_left = -6000
 limit_top = -4000

@@ -19,12 +19,13 @@ func get_selected_bundles() -> Array:
 
 
 func _input(event: InputEvent) -> void:
+	if not selection_system.selected_items: return #no input if there is no selection
 	if is_draging or miaos:
 		drag_input(event)
-	if not miaos: return
-	show_notes_input(event)
-	color_input(event)
-	delete_input(event)
+	if miaos: 
+		show_notes_input(event)
+		color_input(event)
+		delete_input(event)
 	selection_copy_paste.cp_input(event)
 
 

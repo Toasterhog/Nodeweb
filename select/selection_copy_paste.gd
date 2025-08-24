@@ -1,20 +1,39 @@
 extends Control
 class_name SelectionCopyPaste
 
+var is_pasting : bool = false
 @onready var selection_system: SelectionSystem = $".."
 @onready var selection_actions: SelectionActions = $"../SelectionActions"
 var clipboard : DocumentClass
+var mouse_pos_when_copy : Vector2
+@onready var hologram_holder: Node2D = $"../../../papper/hologramHolder"
+var hologram_color = Color(0.2,0.4,0.9,0.6)
+const LINK = preload("res://papperthings/link/link.tscn")
+const ARROW = preload("res://papperthings/link/directional_link/link_directional.tscn")
 
-func cp_input(e : InputEvent):
-	if e is InputEventKey and e.keycode == KEY_C and e.pressed: #replace with action to avoid echo
+func cp_input(e : InputEvent): #called from selection_actions
+	if Input.is_action_just_pressed("ui_copy"): 
 		selection_to_document()
-
+		
+	elif Input.is_action_just_pressed("ui_paste"):
+		if clipboard:
+			document_to_hologram_instances(clipboard)
+	
+	elif Input.is_action_just_pressed("ui_graph_duplicate"):
+		selection_to_document()
+		document_to_hologram_instances(clipboard)
+	
+	if is_pasting:
+		update_hologram()
+		if e is InputEventMouseButton and e.button_index == MOUSE_BUTTON_LEFT and e.pressed:
+			hologram_to_normal_instances()
+		elif e is InputEventMouseButton and e.button_index == MOUSE_BUTTON_RIGHT and e.pressed\
+		or Input.is_action_just_pressed("ui_cancel"):
+			clear_hologram()
 
 func selection_to_document(): #pos relative to mouse, or + mousepos at pste
 	IdManager.reset_ids() #why not idk
 	var document = DocumentClass.new()
-	
-	
 	
 	
 	for b in selection_actions.get_selected_boxes():
@@ -32,21 +51,123 @@ func selection_to_document(): #pos relative to mouse, or + mousepos at pste
 		document.link_res_array.append(res)
 	
 	clipboard = document
-	print("suces")
+	mouse_pos_when_copy = hologram_holder.get_global_mouse_position() #hh bc just to be at the right canvaslayer
+	print("copied")
 
-
-func document_to_hologram_instances(doc : Resource):
-	pass
-
+func document_to_hologram_instances(clipboard : DocumentClass):
+	if not clipboard:
+		print("rotten clipb bleh")
+		return
+	is_pasting = true
+	
+	var doc : DocumentClass = clipboard
+	var c : Camera2D = $"../../../papper/Camera2D"
+	#var num_boxes_from_before : int = $"../../../papper/boxHolder".get_child_count()
+	var hol_instantiated_boxes = []
+	#place boxes
+	for res in doc.box_res_array:
+		var box = BoxProperties.resource_to_item(res) #note id +1000
+		box.set_color(hologram_color)
+		hologram_holder.add_child(box)
+		hol_instantiated_boxes.append(box)
+		box.update_vbc_and_panel_size()
+		#box.position = box.position.clamp(Vector2(c.limit_left,c.limit_top),Vector2(c.limit_right -300,c.limit_bottom - 300))
+	
+	#place bundles
+	for res in doc.bundle_res_array:
+		var bundle = BundleProperties.resource_to_item(res)
+		hologram_holder.add_child(bundle)
+		bundle.set_color(hologram_color)
+		#bundle.position = bundle.position.clamp(Vector2(c.limit_left,c.limit_top),Vector2(c.limit_right -300,c.limit_bottom - 300))
+	
+	#place links and arrows (theres no reason for them to be combined)
+	for res in doc.link_res_array:
+	#	if res.start_box + num_boxes_from_before >= box_holder.get_child_count() or\
+	#	res.end_box + num_boxes_from_before >= box_holder.get_child_count():
+	#		return # no out of bounds children
+		
+		match res.link_type:
+			0:
+				var link = LINK.instantiate()
+				link.base_color = res.color
+				link.start_box = hol_instantiated_boxes[res.start_box]
+				link.end_box = hol_instantiated_boxes[res.end_box]
+				hologram_holder.add_child(link)
+			1:
+				var link = ARROW.instantiate() #this looks messy and is weird
+				link.base_color = res.color
+				link.start_box = hol_instantiated_boxes[res.start_box]
+				link.end_box = hol_instantiated_boxes[res.end_box]
+				hologram_holder.add_child(link)
+				
+	
+	IdManager.reset_ids()
 
 func hologram_to_normal_instances():
-	pass
+	clear_hologram()
+	if not clipboard:
+		print("no clipboard")
+		return
+	
+	var bundle_holder: Node2D = $"../../../papper/bundleHolder"
+	var link_holder: Node2D = $"../../../papper/linkHolder"
+	var arrowholder: Node2D = $"../../../papper/arrowholder"
+	var box_holder: Node2D = $"../../../papper/boxHolder"
+	
+	var doc : DocumentClass = clipboard
+	var c : Camera2D = $"../../../papper/Camera2D"
+	var num_boxes_from_before : int = box_holder.get_child_count()
+	var offset =  bundle_holder.get_global_mouse_position() - mouse_pos_when_copy
+	#place boxes
+	for res in doc.box_res_array:
+		var box = BoxProperties.resource_to_item(res) #note id +1000
+		box_holder.add_child(box)
+		box.update_vbc_and_panel_size()
+		box.position += offset
+		box.position = box.position.clamp(Vector2(c.limit_left,c.limit_top),Vector2(c.limit_right -300,c.limit_bottom - 300))
+	
+	#place bundles
+	for res in doc.bundle_res_array:
+		var bundle = BundleProperties.resource_to_item(res)
+		bundle_holder.add_child(bundle)
+		bundle.position += offset
+		bundle.position = bundle.position.clamp(Vector2(c.limit_left,c.limit_top),Vector2(c.limit_right -300,c.limit_bottom - 300))
+	
+	#place links and arrows (theres no reason for them to be combined)
+	for res in doc.link_res_array:
+		if res.start_box + num_boxes_from_before >= box_holder.get_child_count() or\
+		res.end_box + num_boxes_from_before >= box_holder.get_child_count():
+			return # no out of bounds children
+		
+		match res.link_type:
+			0:
+				var link = LINK.instantiate()
+				link.base_color = res.color
+				link.start_box = box_holder.get_child( res.start_box + num_boxes_from_before)
+				link.end_box = box_holder.get_child( res.end_box + num_boxes_from_before)
+				link_holder.add_child(link)
+			1:
+				var link = ARROW.instantiate() #this looks messy and is weird
+				link.base_color = res.color
+				link.start_box = box_holder.get_child( res.start_box + num_boxes_from_before)
+				link.end_box = box_holder.get_child( res.end_box + num_boxes_from_before)
+				arrowholder.add_child(link)
+				
+	IdManager.reset_ids()
 
+func update_hologram():
+	hologram_holder.position = hologram_holder.get_global_mouse_position() - mouse_pos_when_copy
+
+func clear_hologram():
+	hologram_holder.position = Vector2.ZERO
+	for kid in hologram_holder.get_children():
+		kid.queue_free()
+	is_pasting = false
 
 func derive_links():
 	var derived_links = []
 	var sel_nodes = selection_actions.get_selected_boxes()
-	if sel_nodes.size() < 2: return #cant exist any links
+	if sel_nodes.size() < 2: return derived_links #cant exist any links
 	var boxes = [] #.resize(sel_nodes.size())
 	for s in sel_nodes:
 		boxes.append(s.scriptowner)
@@ -59,11 +180,11 @@ func derive_links():
 					if link_a == link_b and link_a not in derived_links:
 						derived_links.append(link_a)
 	return derived_links
-	
+
 func derive_arrows():
 	var derived_links = []
 	var sel_nodes = selection_actions.get_selected_boxes()
-	if sel_nodes.size() < 2: return #cant exist any links
+	if sel_nodes.size() < 2: return derived_links #cant exist any links
 	var boxes = [] #.resize(sel_nodes.size())
 	for s in sel_nodes:
 		boxes.append(s.scriptowner)
@@ -76,4 +197,3 @@ func derive_arrows():
 					if link_a == link_b and link_a not in derived_links:
 						derived_links.append(link_a)
 	return derived_links
-	
