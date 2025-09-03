@@ -8,7 +8,12 @@ const CRPL = preload("uid://dib5k6nd1co0j")
 
 func _ready() -> void:
 	var OSmode
-	match OS.get_name():
+	#idk
+	var osname = "maybenotwindows"
+	if OS.get_name():
+		osname = OS.get_name()
+	#/idk
+	match osname:
 		"Windows":
 			OSmode = &"windows"
 		"macOS":
