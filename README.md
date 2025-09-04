@@ -5,8 +5,6 @@ tuch pad support
 
 ## Appearance  
 top left buttons style-theme  
-backround  
-- other backround options, flat and depth/mountains  
 - repeating backround and further min zoom  
 
 ## QoL
@@ -46,4 +44,4 @@ selection system
   - delete  
   - color  
   - bundle z-sorting  
-  
+backround options: grid, mountains, color  

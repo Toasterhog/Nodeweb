@@ -88,3 +88,4 @@ hold_to_select={
 textures/canvas_textures/default_texture_repeat=1
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.131414, 0.197154, 0.208088, 1)

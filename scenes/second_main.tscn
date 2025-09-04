@@ -1,5 +1,6 @@
-[gd_scene load_steps=28 format=3 uid="uid://dvarak1c2jild"]
+[gd_scene load_steps=30 format=3 uid="uid://dvarak1c2jild"]
 
+[ext_resource type="Texture2D" uid="uid://cjbutgniigr2q" path="res://zmiscellaneous/MountainBackround.jpg" id="2_3m2s4"]
 [ext_resource type="Texture2D" uid="uid://bwnp541db5h2r" path="res://zmiscellaneous/canvasbackround.png" id="2_lgaoh"]
 [ext_resource type="Script" uid="uid://be4x5mqb1hwnc" path="res://controls/save_button.gd" id="3_dslak"]
 [ext_resource type="Texture2D" uid="uid://cb5cxr1c7j8sf" path="res://zmiscellaneous/paintbucketicon.png" id="3_x4i5i"]
@@ -10,6 +11,7 @@
 [ext_resource type="Script" uid="uid://b28kpbtff8ec4" path="res://state/state_machine_tools.gd" id="6_iv76u"]
 [ext_resource type="PackedScene" uid="uid://d0w244dm2f7g8" path="res://controls/pp_save_name.tscn" id="6_rxabt"]
 [ext_resource type="Script" uid="uid://b81hvllv8aegy" path="res://state/tool_add_box.gd" id="7_ah0n3"]
+[ext_resource type="Script" uid="uid://c20kmaiqtkg7y" path="res://settings/settings_ui.gd" id="7_yad27"]
 [ext_resource type="Theme" uid="uid://bpwh4yi1152b1" path="res://style/the_theme.tres" id="7_yvaoj"]
 [ext_resource type="Script" uid="uid://fe15v5cgcy1x" path="res://scripts/id_manager.gd" id="8_fc7so"]
 [ext_resource type="Script" uid="uid://c1uha3t6cvqka" path="res://state/tool_edit.gd" id="8_lgaoh"]
@@ -46,7 +48,7 @@ script/source = "extends Node
 
 [node name="papper" type="Node2D" parent="."]
 
-[node name="Sprite2D" type="Sprite2D" parent="papper"]
+[node name="background_grid" type="Sprite2D" parent="papper"]
 modulate = Color(0.53, 0.53, 0.53, 1)
 texture_filter = 1
 texture_repeat = 2
@@ -54,6 +56,12 @@ scale = Vector2(6, 6)
 texture = ExtResource("2_lgaoh")
 region_enabled = true
 region_rect = Rect2(-8, -8, 2048, 2048)
+
+[node name="background_mountains" type="Sprite2D" parent="papper"]
+visible = false
+texture = ExtResource("2_3m2s4")
+region_enabled = true
+region_rect = Rect2(-3690, -2052, 11277, 6273)
 
 [node name="bundleHolder" type="Node2D" parent="papper"]
 
@@ -119,6 +127,11 @@ text = "color"
 [node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
 
+[node name="settings" type="Button" parent="CanvasLayer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Settings
+"
+
 [node name="save" type="Button" parent="CanvasLayer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 text = "Save"
@@ -154,6 +167,36 @@ layout_mode = 2
 text = "Clear"
 script = ExtResource("4_yvaoj")
 curve = SubResource("Curve_dslak")
+
+[node name="PanelContainerSettings" type="PanelContainer" parent="CanvasLayer/VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("7_yvaoj")
+script = ExtResource("7_yad27")
+
+[node name="VBoxContainerSettings" type="VBoxContainer" parent="CanvasLayer/VBoxContainer/PanelContainerSettings"]
+layout_mode = 2
+
+[node name="OptionButtonBackground" type="OptionButton" parent="CanvasLayer/VBoxContainer/PanelContainerSettings/VBoxContainerSettings"]
+layout_mode = 2
+flat = true
+selected = 0
+item_count = 3
+popup/item_0/text = "grid"
+popup/item_0/id = 0
+popup/item_1/text = "mountain"
+popup/item_1/id = 1
+popup/item_2/text = "color"
+popup/item_2/id = 3
+popup/item_2/disabled = true
+
+[node name="ColorPickerBackround" type="ColorPickerButton" parent="CanvasLayer/VBoxContainer/PanelContainerSettings/VBoxContainerSettings"]
+layout_mode = 2
+text = "a"
+flat = true
+color = Color(0.880165, 0.104354, 0.104354, 1)
+edit_alpha = false
 
 [node name="PopupMenu" type="PopupMenu" parent="CanvasLayer"]
 title = "titelthig"
@@ -282,11 +325,15 @@ script = ExtResource("20_tcmv2")
 [connection signal="button_down" from="CanvasLayer/VBoxContainer/HBoxContainer/erasor" to="state_machine_tools" method="_on_erasor_button_down"]
 [connection signal="button_down" from="CanvasLayer/VBoxContainer/HBoxContainer/edit" to="state_machine_tools" method="_on_edit_button_down"]
 [connection signal="button_down" from="CanvasLayer/VBoxContainer/HBoxContainer/color" to="state_machine_tools" method="_on_color_button_down"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/HBoxContainer2/settings" to="CanvasLayer/VBoxContainer/PanelContainerSettings" method="_on_settings_pressed"]
 [connection signal="button_up" from="CanvasLayer/VBoxContainer/HBoxContainer2/save" to="CanvasLayer/PopupMenu" method="_on_save_button_up"]
 [connection signal="button_up" from="CanvasLayer/VBoxContainer/HBoxContainer2/load" to="save_load_node/LoadDialog" method="_on_load_button_up"]
 [connection signal="popup_closed" from="CanvasLayer/VBoxContainer/HBoxContainer2/ColorPickerButton" to="state_machine_tools" method="_on_color_picker_button_popup_closed"]
 [connection signal="button_up" from="CanvasLayer/VBoxContainer/HBoxContainer2/Clear" to="CanvasLayer/VBoxContainer/HBoxContainer2/Clear" method="_on_button_up"]
 [connection signal="mouse_entered" from="CanvasLayer/VBoxContainer/HBoxContainer2/Clear" to="CanvasLayer/VBoxContainer/HBoxContainer2/Clear" method="_on_mouse_entered"]
+[connection signal="item_selected" from="CanvasLayer/VBoxContainer/PanelContainerSettings/VBoxContainerSettings/OptionButtonBackground" to="CanvasLayer/VBoxContainer/PanelContainerSettings" method="_on_option_button_background_item_selected"]
+[connection signal="button_down" from="CanvasLayer/VBoxContainer/PanelContainerSettings/VBoxContainerSettings/ColorPickerBackround" to="CanvasLayer/VBoxContainer/PanelContainerSettings" method="_on_color_picker_backround_button_down"]
+[connection signal="color_changed" from="CanvasLayer/VBoxContainer/PanelContainerSettings/VBoxContainerSettings/ColorPickerBackround" to="CanvasLayer/VBoxContainer/PanelContainerSettings" method="_on_color_picker_backround_color_changed"]
 [connection signal="index_pressed" from="CanvasLayer/PopupMenu" to="CanvasLayer/PopupMenu" method="_on_index_pressed"]
 [connection signal="close_requested" from="CanvasLayer/pp_SaveName" to="CanvasLayer/PopupMenu" method="_on_pp_save_name_close_requested"]
 [connection signal="text_submitted" from="CanvasLayer/pp_SaveName/MarginContainer/vbc/LineEdit" to="CanvasLayer/PopupMenu" method="_on_line_edit_text_submitted"]

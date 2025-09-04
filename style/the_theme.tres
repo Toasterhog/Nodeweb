@@ -35,6 +35,7 @@ expand_margin_bottom = 3.0
 [resource]
 AcceptDialog/styles/panel = ExtResource("1_bv7s3")
 Panel/styles/panel = ExtResource("1_bv7s3")
+PanelContainer/styles/panel = ExtResource("1_bv7s3")
 PopupMenu/styles/panel = ExtResource("1_bv7s3")
 PopupPanel/styles/panel = ExtResource("1_bv7s3")
 Window/styles/embedded_border = SubResource("StyleBoxFlat_bv7s3")
