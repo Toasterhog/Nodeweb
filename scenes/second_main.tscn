@@ -169,7 +169,6 @@ script = ExtResource("4_yvaoj")
 curve = SubResource("Curve_dslak")
 
 [node name="PanelContainerSettings" type="PanelContainer" parent="CanvasLayer/VBoxContainer"]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 0
 theme = ExtResource("7_yvaoj")
@@ -197,6 +196,11 @@ text = "a"
 flat = true
 color = Color(0.880165, 0.104354, 0.104354, 1)
 edit_alpha = false
+
+[node name="CheckButtonParallax" type="CheckButton" parent="CanvasLayer/VBoxContainer/PanelContainerSettings/VBoxContainerSettings"]
+layout_mode = 2
+button_pressed = true
+text = "parallax"
 
 [node name="PopupMenu" type="PopupMenu" parent="CanvasLayer"]
 title = "titelthig"
@@ -334,6 +338,7 @@ script = ExtResource("20_tcmv2")
 [connection signal="item_selected" from="CanvasLayer/VBoxContainer/PanelContainerSettings/VBoxContainerSettings/OptionButtonBackground" to="CanvasLayer/VBoxContainer/PanelContainerSettings" method="_on_option_button_background_item_selected"]
 [connection signal="button_down" from="CanvasLayer/VBoxContainer/PanelContainerSettings/VBoxContainerSettings/ColorPickerBackround" to="CanvasLayer/VBoxContainer/PanelContainerSettings" method="_on_color_picker_backround_button_down"]
 [connection signal="color_changed" from="CanvasLayer/VBoxContainer/PanelContainerSettings/VBoxContainerSettings/ColorPickerBackround" to="CanvasLayer/VBoxContainer/PanelContainerSettings" method="_on_color_picker_backround_color_changed"]
+[connection signal="toggled" from="CanvasLayer/VBoxContainer/PanelContainerSettings/VBoxContainerSettings/CheckButtonParallax" to="CanvasLayer/VBoxContainer/PanelContainerSettings" method="_on_check_button_parallax_toggled"]
 [connection signal="index_pressed" from="CanvasLayer/PopupMenu" to="CanvasLayer/PopupMenu" method="_on_index_pressed"]
 [connection signal="close_requested" from="CanvasLayer/pp_SaveName" to="CanvasLayer/PopupMenu" method="_on_pp_save_name_close_requested"]
 [connection signal="text_submitted" from="CanvasLayer/pp_SaveName/MarginContainer/vbc/LineEdit" to="CanvasLayer/PopupMenu" method="_on_line_edit_text_submitted"]

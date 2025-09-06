@@ -1,9 +1,9 @@
 extends Camera2D
 
 var target_zoom := 1.0
-var max_zoom := 1.5  # furthest in
+var max_zoom := 2.0  # furthest in
 var min_zoom := 0.15  #furthest out
-var delta_zoom := 0.3 #sensitivity / differance per wheel movement
+var delta_zoom := 0.25 #sensitivity / differance per wheel movement
 var zoom_rate := 10  #speed to follow, lower = dragy and delayed
 var viewport_size 
 func _ready() -> void:

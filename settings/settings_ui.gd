@@ -6,6 +6,7 @@ extends PanelContainer
 @onready var background_grid: Sprite2D = $"../../../papper/background_grid"
 @onready var background_mountains: Sprite2D = $"../../../papper/background_mountains"
 var current_background
+@onready var check_button_parallax: CheckButton = $VBoxContainerSettings/CheckButtonParallax
 
 func _ready() -> void:
 	current_background = background_grid
@@ -13,7 +14,7 @@ func _ready() -> void:
 	color_picker_backround.color = RenderingServer.get_default_clear_color()
 
 func _process(delta: float) -> void:
-	current_background.position = camera.position * 0.6
+	current_background.position = camera.position * 0.4
 
 func _on_settings_pressed() -> void:
 	visible = not visible #the settings panel
@@ -33,8 +34,9 @@ func set_bg(canv_or_null):
 	if canv_or_null is Sprite2D:
 		current_background = canv_or_null
 		current_background.show()
-		set_process(true)
-		print(canv_or_null)
+		set_process(check_button_parallax.button_pressed)
+		current_background.position = Vector2.ZERO
+
 	else:
 		current_background = null
 		set_process(false)
@@ -46,3 +48,8 @@ func _on_color_picker_backround_button_down() -> void:
 
 func _on_color_picker_backround_color_changed(color: Color) -> void:
 	RenderingServer.set_default_clear_color(color)
+
+func _on_check_button_parallax_toggled(toggled_on: bool) -> void:
+	if current_background:
+		set_process(check_button_parallax.button_pressed)
+		current_background.position = Vector2.ZERO
